@@ -33,7 +33,7 @@ namespace UnidasTestProject.Page
         private IWebElement _txtCabecalhoConta;
 
 
-        [FindsBy(How = How.XPath, Using = "//a[@title='SEMAR SUPERMERCADO LTDA']")]
+        [FindsBy(How = How.XPath, Using = "//*[@id='brandBand_1']//a[@title='SEMAR SUPERMERCADO LTDA']")]
         [CacheLookup]
         private IWebElement _linkConta;
         
@@ -50,8 +50,9 @@ namespace UnidasTestProject.Page
         {
             TestBase.thisElement(_txtCabecalhoConta, action.Click);
             TestBase.thisElement(_cpPesquisar, action.Click);
-            TestBase.thisElement(_cpPesquisar, action.SendKey, "SEMAR");
+            TestBase.thisElement(_cpPesquisar, action.SendKey, "SEMAR SUPERMERCADO LTDA");
             TestBase.thisElement(_cpPesquisar, action.Enter);
+            TestBase.thisElement(_linkConta, action.Click);
         }
     }
 }
