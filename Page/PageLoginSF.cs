@@ -24,10 +24,6 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _btnFacaLoginNoSandbox;
 
-        [FindsBy(How = How.Id, Using = "logo")]
-        [CacheLookup]
-        private IWebElement _imgLogo;
-
         //Contrutor da classe
         public PageLoginSF(IWebDriver driver)
         {
@@ -42,10 +38,6 @@ namespace UnidasTestProject.Page
             TestBase.thisElement(_txtNomeDoUsuario, action.SendKey, _usuario);
             TestBase.thisElement(_txtSenha, action.SendKey, _senha);
             TestBase.thisElement(_btnFacaLoginNoSandbox, action.Click);
-        }
-        public void AguardaPagina()
-        {
-            TestBase.thisElement(_imgLogo);
         }
     }
 }

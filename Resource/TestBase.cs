@@ -109,7 +109,7 @@ namespace UnidasTestProject.Resource
             EvidenceFileName = Path.Combine(TestResultsDirectory,"evidence" + DateTime.Now.ToString("ddMMyyyyThhmmss") + ".png");
             Screenshot.SaveAsFile(EvidenceFileName, ScreenshotImageFormat.Png);
 
-            TestInfo = "<h5>" + Logger + "</h5><h10>" + message + "</h10>";
+            TestInfo = Logger +  message;
 
             if (condition)
             {
@@ -122,7 +122,7 @@ namespace UnidasTestProject.Resource
             }
             
         }
-        public static void thisElement(IWebElement? element, action action = action.Wait , string text="")
+        public static void thisElement(IWebElement? element, action action, string text="")
         {
             try
             {
@@ -141,9 +141,6 @@ namespace UnidasTestProject.Resource
                             break;
                         case action.Submit:
                             element.Submit();
-                            break;
-                        case action.Wait:
-                            element.GetType();
                             break;
                     }
                     Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento " + element.TagName + " - " + element.Text);

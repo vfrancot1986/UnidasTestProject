@@ -16,6 +16,10 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _txtTituloConta;
 
+        [FindsBy(How = How.XPath, Using = "//span[@class='slds-var-p-right_x-small' and contains(text(), 'Contas')]")]
+        [CacheLookup]
+        private IWebElement _txtPaginaContas;
+
         [FindsBy(How = How.XPath, Using = "//button[@title='Neutral action']")]
         [CacheLookup]
         private IWebElement? _btnNovaOportunidade;
@@ -29,9 +33,6 @@ namespace UnidasTestProject.Page
         }
 
         //Ações da página
-        public void AguardaPagina() {
-            TestBase.thisElement(_txtTituloConta);            
-        }
         public void NovaOportunidade()
         {
             TestBase.thisElement(_btnNovaOportunidade, action.Click);     

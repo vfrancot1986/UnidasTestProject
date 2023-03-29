@@ -12,10 +12,6 @@ namespace UnidasTestProject.Page
         private WebDriverWait _espera;
 
         //Mapeamento dos elementos
-        [FindsBy(How = How.XPath, Using = "//span[@class='slds-card__header-link slds-text-heading_small']")]
-        [CacheLookup]
-        private IWebElement _txtTituloOportunidade;
-
         [FindsBy(How = How.Name, Using = "TipoDeOportunidade")]
         [CacheLookup]
         private IWebElement _selTipoOportunidade;
@@ -53,9 +49,6 @@ namespace UnidasTestProject.Page
         }
 
         //Ações da página
-        public void AguardaPagina() {
-            TestBase.thisElement(_txtTituloOportunidade);
-        }
         public void CadNovaOportunidade()
         {
             TestBase.thisElement(_selTipoOportunidade, action.Click);

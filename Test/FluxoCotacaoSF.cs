@@ -13,8 +13,7 @@ namespace UnidasTestProject.Test
         {
             //Arrange - Pré-condição do teste
             PageLoginSF PageLoginSF = new PageLoginSF(_driver);
-            PageInicioSF PageInicioSF = new 
-            PageInicioSF(_driver);
+            PageInicioSF PageInicioSF = new PageInicioSF(_driver);
             PageContaSF PageContaSF = new PageContaSF(_driver);
             PageOportunidadeSF PageOportunidadeSF = new PageOportunidadeSF(_driver);
 
@@ -24,11 +23,8 @@ namespace UnidasTestProject.Test
 
             //Act - Ações do teste
             AbrirSF(_url);
-            PageLoginSF.AguardaPagina();
             PageLoginSF.FazerLogin(_usuario, _senha);
-            PageInicioSF.AguardaPagina();
             PageInicioSF.PesquisarConta();
-            PageContaSF.AguardaPagina();
             PageContaSF.NovaOportunidade();
 ;
         }
