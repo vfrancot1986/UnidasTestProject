@@ -146,10 +146,10 @@ namespace UnidasTestProject.Resource
                             element.GetType();
                             break;
                     }
-                    Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento " + element.Location);
+                    Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento " + element.TagName + " - " + element.Text);
                 }
                 else {
-                    Checkpoint(false, "Ação inválida para o elemento: " + element.Location);
+                    Checkpoint(false, "Ação inválida para o elemento: " + element.TagName + " - " + element.Text);
                 }               
             }
             catch (NoSuchElementException e)

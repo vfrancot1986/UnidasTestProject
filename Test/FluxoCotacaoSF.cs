@@ -26,15 +26,11 @@ namespace UnidasTestProject.Test
             AbrirSF(_url);
             PageLoginSF.AguardaPagina();
             PageLoginSF.FazerLogin(_usuario, _senha);
-
-            //Assert - Validações do teste
-
             PageInicioSF.AguardaPagina();
             PageInicioSF.PesquisarConta();
             PageContaSF.AguardaPagina();
             PageContaSF.NovaOportunidade();
-            //PageOportunidadeSF.AguardaPagina();
-            //PageOportunidadeSF.CadNovaOportunidade();
+;
         }
     }
 }
