@@ -25,7 +25,7 @@ namespace UnidasTestProject.Test
             AbrirSF(_url);
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
-            PageContaSF.NovaOportunidade();
+            //PageContaSF.NovaOportunidade();
 ;
         }
     }

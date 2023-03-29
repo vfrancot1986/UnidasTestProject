@@ -58,6 +58,9 @@ namespace UnidasTestProject.Resource
             // Configuração do WebDriver
             _driver = new ChromeDriver();
             _espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //_driver.Manage().Timeouts().
             _driver.Manage().Window.Maximize();
 
 
@@ -142,11 +145,14 @@ namespace UnidasTestProject.Resource
                         case action.Submit:
                             element.Submit();
                             break;
+                        case action.Enter:
+                            element.SendKeys(Keys.Enter);
+                            break;
                     }
-                    Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento " + element.TagName + " - " + element.Text);
+                    Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento");
                 }
                 else {
-                    Checkpoint(false, "Ação inválida para o elemento: " + element.TagName + " - " + element.Text);
+                    Checkpoint(false, "Ação inválida para o elemento");
                 }               
             }
             catch (NoSuchElementException e)
