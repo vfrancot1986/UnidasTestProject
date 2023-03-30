@@ -26,7 +26,9 @@ namespace UnidasTestProject.Test
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
             PageContaSF.NovaOportunidade();
-            ;
+
+            //Assert - Validação do teste
+            
         }
     }
 }
