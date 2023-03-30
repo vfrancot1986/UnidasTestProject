@@ -60,10 +60,7 @@ namespace UnidasTestProject.Resource
             _espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            //_driver.Manage().Timeouts().
             _driver.Manage().Window.Maximize();
-
-
 
             // Configuração do ExtentReports
             TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
