@@ -37,7 +37,7 @@ namespace UnidasTestProject.Page
         //Ações da página
         public void NovaOportunidade()
         {
-            TestBase.thisElement(_btnNovaOportunidade, action.Click);     
+            TestBase.thisElement(_btnNovaOportunidade, action.Click);
         }
     }
 }

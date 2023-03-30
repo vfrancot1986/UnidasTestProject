@@ -36,7 +36,7 @@ namespace UnidasTestProject.Page
         [FindsBy(How = How.XPath, Using = "//*[@id='brandBand_1']//a[@title='SEMAR SUPERMERCADO LTDA']")]
         [CacheLookup]
         private IWebElement _linkConta;
-        
+
         //Contrutor da classe
         public PageInicioSF(IWebDriver driver)
         {

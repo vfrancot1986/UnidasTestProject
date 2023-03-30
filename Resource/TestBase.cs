@@ -1,13 +1,13 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using System.Diagnostics;
-using UnidasTestProject.Settings;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System.Diagnostics;
+using UnidasTestProject.Settings;
 
 
 namespace UnidasTestProject.Resource
@@ -66,7 +66,7 @@ namespace UnidasTestProject.Resource
 
 
             // Configuração do ExtentReports
-            TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"),$"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
+            TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
 
             ExtentFileName = Path.Combine(TestResultsDirectory, "TEST" + '_' + DateTime.Now.ToString("ddMMyyyy_hhmmss") + ".html");
 
@@ -87,7 +87,8 @@ namespace UnidasTestProject.Resource
             Test = Extent.CreateTest("TEST" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
         }
 
-        public void AbrirSF(string _url) {
+        public void AbrirSF(string _url)
+        {
             _driver.Navigate().GoToUrl(_url);
         }
 
@@ -105,27 +106,28 @@ namespace UnidasTestProject.Resource
             ExecuteCmd("taskkill /im chromedriver.exe /f /t");
         }
 
-        public static void Checkpoint(bool condition, string message) {
+        public static void Checkpoint(bool condition, string message)
+        {
 
             Thread.Sleep(1000);
             Screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
-            EvidenceFileName = Path.Combine(TestResultsDirectory,"evidence" + DateTime.Now.ToString("ddMMyyyyThhmmss") + ".png");
+            EvidenceFileName = Path.Combine(TestResultsDirectory, "evidence" + DateTime.Now.ToString("ddMMyyyyThhmmss") + ".png");
             Screenshot.SaveAsFile(EvidenceFileName, ScreenshotImageFormat.Png);
 
-            TestInfo = Logger +  message;
+            TestInfo = Logger + message;
 
             if (condition)
             {
-                Test.Log(Status.Pass, TestInfo, MediaEntityBuilder.CreateScreenCaptureFromPath(EvidenceFileName).Build());                
+                Test.Log(Status.Pass, TestInfo, MediaEntityBuilder.CreateScreenCaptureFromPath(EvidenceFileName).Build());
             }
             else
             {
                 Test.Log(Status.Fail, TestInfo, MediaEntityBuilder.CreateScreenCaptureFromPath(EvidenceFileName).Build());
                 Assert.Fail();
             }
-            
+
         }
-        public static void thisElement(IWebElement? element, action action, string text="")
+        public static void thisElement(IWebElement? element, action action, string text = "")
         {
             try
             {
@@ -149,15 +151,16 @@ namespace UnidasTestProject.Resource
                             element.SendKeys(Keys.Enter);
                             break;
                     }
-                    Checkpoint(true, "Ação "+ action + " realizada com sucesso no elemento");
+                    Checkpoint(true, "Ação " + action + " realizada com sucesso no elemento");
                 }
-                else {
+                else
+                {
                     Checkpoint(false, "Ação inválida para o elemento");
-                }               
+                }
             }
             catch (NoSuchElementException e)
             {
-                Checkpoint(false, e.Message);                
+                Checkpoint(false, e.Message);
             }
             catch (Exception e)
             {
@@ -184,7 +187,7 @@ namespace UnidasTestProject.Resource
             Thread.Sleep(3000);
 
             return list;
-        }    
+        }
 
     }
     public enum action
