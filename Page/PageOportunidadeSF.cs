@@ -12,7 +12,7 @@ namespace UnidasTestProject.Page
         private WebDriverWait _espera;
 
         //Mapeamento dos elementos
-        [FindsBy(How = How.Name, Using = "TipoDeOportunidade")]
+        [FindsBy(How = How.XPath, Using = "//*[@name='TipoDeOportunidade']")]
         [CacheLookup]
         private IWebElement _selTipoOportunidade;
 
