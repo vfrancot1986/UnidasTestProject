@@ -20,7 +20,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _txtPaginaContas;
 
-        [FindsBy(How = How.XPath, Using = "//h2[contains(text(), 'Nova Oportunidade')]")]
+        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Nova Oportunidade')]")]
         [CacheLookup]
         private IWebElement? _btnNovaOportunidade;
 
@@ -35,7 +35,7 @@ namespace UnidasTestProject.Page
         //Ações da página
         public void NovaOportunidade()
         {
-            TestBase.thisElement(_btnNovaOportunidade, action.Click);
+            TestBase.thisElement(_btnNovaOportunidade, action.ClickPoint);
         }
     }
 }

@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System.Diagnostics;
 using UnidasTestProject.Settings;
 
@@ -135,6 +137,9 @@ namespace UnidasTestProject.Resource
                         case action.Click:
                             element.Click();
                             break;
+                        case action.ClickPoint:
+                            new Actions(_driver).MoveToElement(element).Click().Build().Perform();
+                            break;
                         case action.SendKey:
                             element.SendKeys(text);
                             break;
@@ -190,6 +195,7 @@ namespace UnidasTestProject.Resource
     public enum action
     {
         Click,
+        ClickPoint,
         SendKey,
         Clear,
         Submit,
