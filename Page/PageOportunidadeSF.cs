@@ -16,6 +16,14 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _selTipoOportunidade;
 
+        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locação']")]
+        [CacheLookup]
+        private IWebElement _selTipoOportunidadeLocação;
+
+
+        
+
+
         [FindsBy(How = How.Name, Using = "SubtipoDaOpp")]
         [CacheLookup]
         private IWebElement _selSubtipoDaOpp;
@@ -52,12 +60,14 @@ namespace UnidasTestProject.Page
         public void CadNovaOportunidade()
         {
             TestBase.thisElement(_selTipoOportunidade, action.Click);
-            TestBase.thisElement(_selSubtipoDaOpp, action.Click);
-            TestBase.thisElement(_selCategoriaDoDispositivo, action.Click);
-            TestBase.thisElement(_txtNomeDaOportunidade, action.SendKey, "TesteAutomacao_New_OPR");
-            TestBase.thisElement(_selFaseOpp2, action.Click);
-            TestBase.thisElement(_txtDataDeFechamento, action.SendKey, "01/01/2001");
-            TestBase.thisElement(_btnAvancar, action.Click);
+            TestBase.thisElement(_selTipoOportunidadeLocação, action.Click);
+
+            //TestBase.thisElement(_selSubtipoDaOpp, action.Click);
+            //TestBase.thisElement(_selCategoriaDoDispositivo, action.Click);
+            //TestBase.thisElement(_txtNomeDaOportunidade, action.SendKey, "TesteAutomacao_New_OPR");
+            //TestBase.thisElement(_selFaseOpp2, action.Click);
+            //TestBase.thisElement(_txtDataDeFechamento, action.SendKey, "01/01/2001");
+            //TestBase.thisElement(_btnAvancar, action.Click);
         }
     }
 }
