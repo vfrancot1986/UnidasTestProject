@@ -21,11 +21,11 @@ namespace UnidasTestProject.Resource
         public static WebDriverWait? _espera;
         public static IWebElement? _element;
         public ServiceProvider ServiceProvider { get; }
-        public static string? TestResultsDirectory;
+        private static readonly string TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
         public string ExtentFileName;
         public ExtentReports Extent;
         public static ExtentTest? Test;
-        public ExtentHtmlReporter HtmlReporter;
+        private static readonly ExtentV3HtmlReporter HtmlReporter = new ExtentV3HtmlReporter(Path.Combine(TestResultsDirectory, $"TEST_{DateTime.Now:ddMMyyyy_hhmmss}.html"));
         public static Screenshot? Screenshot;
         public static string? EvidenceFileName;
         public static string? TestInfo;
@@ -63,10 +63,7 @@ namespace UnidasTestProject.Resource
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Manage().Window.Maximize();
-
-            // Configuração do ExtentReports
-            TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
-
+                        
             ExtentFileName = Path.Combine(TestResultsDirectory, "TEST" + '_' + DateTime.Now.ToString("ddMMyyyy_hhmmss") + ".html");
 
             if (!Directory.Exists(TestResultsDirectory))
@@ -79,7 +76,6 @@ namespace UnidasTestProject.Resource
                 File.Create(ExtentFileName);
             }
 
-            HtmlReporter = new ExtentHtmlReporter(ExtentFileName);
             Extent = new ExtentReports();
             Extent.AttachReporter(HtmlReporter);
 
