@@ -25,7 +25,7 @@ namespace UnidasTestProject.Resource
         public string ExtentFileName;
         public ExtentReports Extent;
         public static ExtentTest? Test;
-        private static readonly ExtentV3HtmlReporter HtmlReporter = new ExtentV3HtmlReporter(Path.Combine(TestResultsDirectory, $"TEST_{DateTime.Now:ddMMyyyy_hhmmss}.html"));
+        private static readonly ExtentHtmlReporter HtmlReporter = new ExtentHtmlReporter(Path.Combine(TestResultsDirectory, $"TEST_{DateTime.Now:ddMMyyyy_hhmmss}.html"));
         public static Screenshot? Screenshot;
         public static string? EvidenceFileName;
         public static string? TestInfo;
