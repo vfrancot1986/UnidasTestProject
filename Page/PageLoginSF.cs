@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using UnidasTestProject.Resource;
 
@@ -7,9 +6,6 @@ namespace UnidasTestProject.Page
 {
     public class PageLoginSF
     {
-        //Declaração de variáveis
-        private IWebDriver _driver;
-        private WebDriverWait _espera;
 
         //Mapeamento dos elementos
         [FindsBy(How = How.Id, Using = "username")]
@@ -27,8 +23,6 @@ namespace UnidasTestProject.Page
         //Contrutor da classe
         public PageLoginSF(IWebDriver driver)
         {
-            _driver = driver;
-            _espera = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             PageFactory.InitElements(driver, this);
         }
 

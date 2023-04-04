@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using UnidasTestProject.Resource;
 
@@ -7,9 +6,6 @@ namespace UnidasTestProject.Page
 {
     public class PageOportunidadeSF
     {
-        //Declaração de variáveis
-        private IWebDriver _driver;
-        private WebDriverWait _espera;
 
         //Mapeamento dos elementos
         [FindsBy(How = How.XPath, Using = "//*[@name='TipoDeOportunidade']")]
@@ -18,10 +14,8 @@ namespace UnidasTestProject.Page
 
         [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locação']")]
         [CacheLookup]
-        private IWebElement _selTipoOportunidadeLocação;
+        private IWebElement _selTipoOportunidadeLocação;        
 
-
-        
 
 
         [FindsBy(How = How.Name, Using = "SubtipoDaOpp")]
@@ -51,8 +45,6 @@ namespace UnidasTestProject.Page
         //Contrutor da classe
         public PageOportunidadeSF(IWebDriver driver)
         {
-            _driver = driver;
-            _espera = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             PageFactory.InitElements(driver, this);
         }
 
