@@ -52,6 +52,12 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _btnAvancar;
 
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuário não possui Área de negócio preenchido! Impossível prosseguir.')]")]
+        [CacheLookup]
+        private IWebElement _msgUsuárioNaoPossuiAreaNegocio;
+
+        
+
         //Contrutor da classe
         public PageOportunidadeSF(IWebDriver driver)
         {
@@ -75,5 +81,21 @@ namespace UnidasTestProject.Page
             TestBase.thisElement(_txtDataDeFechamento, action.SendKey, "01/01/2001");
             TestBase.thisElement(_btnAvancar, action.Click);
         }
+        public bool ValidarMsgUsuárioNaoPossuiAreaNegocio()
+        {
+            TestBase.thisElement(_btnAvancar, action.Wait);
+                
+            //if ()
+            //{
+                return true;
+
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+        }
+            
     }
 }
