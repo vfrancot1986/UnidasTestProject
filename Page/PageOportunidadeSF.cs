@@ -12,7 +12,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _selTipoOportunidade;
 
-        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locacao']")]
+        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locação']")]
         [CacheLookup]
         private IWebElement _selTipoOportunidadeLocacao;
 
@@ -20,7 +20,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _selSubtipoDaOpp;
 
-        [FindsBy(How = How.XPath, Using = "//*[@value='SubtipodaOppOpcoes.Acrescimo']")]
+        [FindsBy(How = How.XPath, Using = "//*[@value='SubtipodaOppOpcoes.Acréscimo']")]
         [CacheLookup]
         private IWebElement _selSubtipoDaOppAcrescimo;
 
@@ -48,11 +48,11 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _txtDataDeFechamento;
 
-        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Avancar')]")]
+        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Avançar')]")]
         [CacheLookup]
         private IWebElement _btnAvancar;
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuario nao possui area de negócio preenchido! Impossivel prosseguir.')]")]
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuario não possui área de negócio preenchido! Impossível prosseguir.')]")]
         [CacheLookup]
         private IWebElement _msgUsuarioNaoPossuiAreaNegocio;
 
@@ -84,17 +84,7 @@ namespace UnidasTestProject.Page
         public bool ValidarMsgUsuarioNaoPossuiAreaNegocio()
         {
             TestBase.thisElement(_msgUsuarioNaoPossuiAreaNegocio, action.Wait);
-                
-            //if ()
-            //{
-                return true;
-
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-
+            return true;
         }
             
     }
