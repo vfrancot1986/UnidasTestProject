@@ -22,7 +22,7 @@ namespace UnidasTestProject.Page
 
         [FindsBy(How = How.XPath, Using = "//*[@value='SubtipodaOppOpcoes.Acréscimo']")]
         [CacheLookup]
-        private IWebElement _selSubtipoDaOppAcréscimo;
+        private IWebElement _selSubtipoDaOppAcrescimo;
 
         [FindsBy(How = How.XPath, Using = "//*[@name='CategoriaDoDispositivo']")]
         [CacheLookup]
@@ -54,7 +54,7 @@ namespace UnidasTestProject.Page
 
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuário não possui Área de negócio preenchido! Impossível prosseguir.')]")]
         [CacheLookup]
-        private IWebElement _msgUsuárioNaoPossuiAreaNegocio;
+        private IWebElement _msgUsuarioNaoPossuiAreaNegocio;
 
         
 
@@ -70,7 +70,7 @@ namespace UnidasTestProject.Page
             TestBase.thisElement(_selTipoOportunidade, action.Click);
             TestBase.thisElement(_selTipoOportunidadeLocação, action.Click);
             TestBase.thisElement(_selSubtipoDaOpp, action.Click);
-            TestBase.thisElement(_selSubtipoDaOppAcréscimo, action.Click);
+            TestBase.thisElement(_selSubtipoDaOppAcrescimo, action.Click);
             TestBase.thisElement(_selCategoriaDoDispositivo, action.Click);
             TestBase.thisElement(CategoriaDoDispositivoOpcoesNovo, action.Click);
             TestBase.thisElement(_txtNomeDaOportunidade, action.Click);
@@ -83,7 +83,7 @@ namespace UnidasTestProject.Page
         }
         public bool ValidarMsgUsuárioNaoPossuiAreaNegocio()
         {
-            TestBase.thisElement(_btnAvancar, action.Wait);
+            TestBase.thisElement(_msgUsuarioNaoPossuiAreaNegocio, action.Wait);
                 
             //if ()
             //{
