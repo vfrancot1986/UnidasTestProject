@@ -148,6 +148,8 @@ namespace UnidasTestProject.Resource
                         case action.Enter:
                             element.SendKeys(Keys.Enter);
                             break;
+                        case action.Wait:
+                            break;
                     }
                     Checkpoint(true, "Ação " + action + " realizada com sucesso no elemento");
                 }

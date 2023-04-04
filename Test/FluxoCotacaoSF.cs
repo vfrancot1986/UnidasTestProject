@@ -31,5 +31,30 @@ namespace UnidasTestProject.Test
             //Assert - Validação do teste
             
         }
+        //TestCase
+        [Test]
+        public void OportunidadeUsuarioSemInodadeNegocio()
+        {
+            //Arrange - Pré-condição do teste
+            PageLoginSF PageLoginSF = new PageLoginSF(_driver);
+            PageInicioSF PageInicioSF = new PageInicioSF(_driver);
+            PageContaSF PageContaSF = new PageContaSF(_driver);
+            PageOportunidadeSF PageOportunidadeSF = new PageOportunidadeSF(_driver);
+
+            string? _url = AppSettings.UrlQA;
+            string? _usuario = AppSettings.UserQA;
+            string? _senha = AppSettings.PasswordQA;
+
+            //Act - Ações do teste
+            AbrirSF(_url);
+            PageLoginSF.FazerLogin(_usuario, _senha);
+            PageInicioSF.PesquisarConta();
+            PageContaSF.NovaOportunidade();
+            PageOportunidadeSF.CadNovaOportunidade();
+
+            //Assert - Validação do teste
+
+            Assert.IsTrue(PageOportunidadeSF.ValidarMsgUsuárioNaoPossuiAreaNegocio());
+        }
     }
 }
