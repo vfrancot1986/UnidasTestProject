@@ -16,7 +16,7 @@ namespace UnidasTestProject.Resource
 {
     public abstract class TestBase
     {
-        //Declaração de variáveis
+        //Declaracao de variaveis
         public static IWebDriver? _driver;
         public static WebDriverWait? _espera;
         public static IWebElement? _element;
@@ -34,7 +34,7 @@ namespace UnidasTestProject.Resource
         //Construtor
         public TestBase()
         {
-            // Configuração do AppSettings
+            // Configuracao do AppSettings
             var services = new ServiceCollection().AddTransient<IConfiguration>(sp => new ConfigurationBuilder().AddJsonFile("appSettings.json").Build());
 
             ServiceProvider = services.BuildServiceProvider();
@@ -57,7 +57,7 @@ namespace UnidasTestProject.Resource
         public void Initialize()
         {
 
-            // Configuração do WebDriver
+            // Configuracao do WebDriver
             _driver = new ChromeDriver();
             _espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
@@ -92,7 +92,7 @@ namespace UnidasTestProject.Resource
         public void CleanUp()
         {
 
-            // Finalização do teste no ExtentReports
+            // Finalizacao do teste no ExtentReports
             Extent.Flush();
 
             // Encerramento do WebDriver
@@ -151,11 +151,11 @@ namespace UnidasTestProject.Resource
                         case action.Wait:
                             break;
                     }
-                    Checkpoint(true, "Ação " + action + " realizada com sucesso no elemento");
+                    Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
                 }
                 else
                 {
-                    Checkpoint(false, "Ação inválida para o elemento");
+                    Checkpoint(false, "Acao invalida para o elemento");
                 }
             }
             catch (NoSuchElementException e)

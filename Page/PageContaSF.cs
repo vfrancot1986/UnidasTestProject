@@ -26,7 +26,7 @@ namespace UnidasTestProject.Page
             PageFactory.InitElements(driver, this);
         }
 
-        //Ações da página
+        //Acoes da pagina
         public void NovaOportunidade()
         {
             TestBase.thisElement(_btnNovaOportunidade, action.ClickPoint);

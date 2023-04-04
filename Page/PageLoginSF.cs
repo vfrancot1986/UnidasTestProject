@@ -26,7 +26,7 @@ namespace UnidasTestProject.Page
             PageFactory.InitElements(driver, this);
         }
 
-        //Ações da página
+        //Acoes da pagina
         public void FazerLogin(string _usuario, string _senha)
         {
             TestBase.thisElement(_txtNomeDoUsuario, action.SendKey, _usuario);

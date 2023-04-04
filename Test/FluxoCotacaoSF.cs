@@ -11,7 +11,7 @@ namespace UnidasTestProject.Test
         [Test]
         public void TestFluxoCotacao()
         {
-            //Arrange - Pré-condição do teste
+            //Arrange - Pré-condicao do teste
             PageLoginSF PageLoginSF = new PageLoginSF(_driver);
             PageInicioSF PageInicioSF = new PageInicioSF(_driver);
             PageContaSF PageContaSF = new PageContaSF(_driver);
@@ -21,21 +21,21 @@ namespace UnidasTestProject.Test
             string? _usuario = AppSettings.UserQA;
             string? _senha = AppSettings.PasswordQA;
 
-            //Act - Ações do teste
+            //Act - Acoes do teste
             AbrirSF(_url);
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
             PageContaSF.NovaOportunidade();
             PageOportunidadeSF.CadNovaOportunidade();
 
-            //Assert - Validação do teste
+            //Assert - Validacao do teste
             
         }
         //TestCase
         [Test]
         public void OportunidadeUsuarioSemInodadeNegocio()
         {
-            //Arrange - Pré-condição do teste
+            //Arrange - Pré-condicao do teste
             PageLoginSF PageLoginSF = new PageLoginSF(_driver);
             PageInicioSF PageInicioSF = new PageInicioSF(_driver);
             PageContaSF PageContaSF = new PageContaSF(_driver);
@@ -45,16 +45,16 @@ namespace UnidasTestProject.Test
             string? _usuario = AppSettings.UserQA;
             string? _senha = AppSettings.PasswordQA;
 
-            //Act - Ações do teste
+            //Act - Acoes do teste
             AbrirSF(_url);
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
             PageContaSF.NovaOportunidade();
             PageOportunidadeSF.CadNovaOportunidade();
 
-            //Assert - Validação do teste
+            //Assert - Validacao do teste
 
-            Assert.IsTrue(PageOportunidadeSF.ValidarMsgUsuárioNaoPossuiAreaNegocio());
+            Assert.IsTrue(PageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
         }
     }
 }

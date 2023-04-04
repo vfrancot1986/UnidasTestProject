@@ -12,15 +12,15 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _selTipoOportunidade;
 
-        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locação']")]
+        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locacao']")]
         [CacheLookup]
-        private IWebElement _selTipoOportunidadeLocação;
+        private IWebElement _selTipoOportunidadeLocacao;
 
         [FindsBy(How = How.XPath, Using = "//*[@name='SubtipoDaOpp']")]
         [CacheLookup]
         private IWebElement _selSubtipoDaOpp;
 
-        [FindsBy(How = How.XPath, Using = "//*[@value='SubtipodaOppOpcoes.Acréscimo']")]
+        [FindsBy(How = How.XPath, Using = "//*[@value='SubtipodaOppOpcoes.Acrescimo']")]
         [CacheLookup]
         private IWebElement _selSubtipoDaOppAcrescimo;
 
@@ -48,11 +48,11 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _txtDataDeFechamento;
 
-        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Avançar')]")]
+        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Avancar')]")]
         [CacheLookup]
         private IWebElement _btnAvancar;
 
-        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuário não possui Área de negócio preenchido! Impossível prosseguir.')]")]
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Seu usuario nao possui area de negócio preenchido! Impossivel prosseguir.')]")]
         [CacheLookup]
         private IWebElement _msgUsuarioNaoPossuiAreaNegocio;
 
@@ -64,11 +64,11 @@ namespace UnidasTestProject.Page
             PageFactory.InitElements(driver, this);
         }
 
-        //Ações da página
+        //Acoes da pagina
         public void CadNovaOportunidade()
         {
             TestBase.thisElement(_selTipoOportunidade, action.Click);
-            TestBase.thisElement(_selTipoOportunidadeLocação, action.Click);
+            TestBase.thisElement(_selTipoOportunidadeLocacao, action.Click);
             TestBase.thisElement(_selSubtipoDaOpp, action.Click);
             TestBase.thisElement(_selSubtipoDaOppAcrescimo, action.Click);
             TestBase.thisElement(_selCategoriaDoDispositivo, action.Click);
@@ -81,7 +81,7 @@ namespace UnidasTestProject.Page
             TestBase.thisElement(_txtDataDeFechamento, action.SendKey, "01/01/2001");
             TestBase.thisElement(_btnAvancar, action.Click);
         }
-        public bool ValidarMsgUsuárioNaoPossuiAreaNegocio()
+        public bool ValidarMsgUsuarioNaoPossuiAreaNegocio()
         {
             TestBase.thisElement(_msgUsuarioNaoPossuiAreaNegocio, action.Wait);
                 
