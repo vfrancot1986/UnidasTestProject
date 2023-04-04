@@ -16,6 +16,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         private IWebElement _txtPrazoContratual;
 
+        //parei aqui
         [FindsBy(How = How.XPath, Using = "//*[@name='SubtipoDaOpp']")]
         [CacheLookup]
         private IWebElement _selSubtipoDaOpp;
@@ -70,7 +71,7 @@ namespace UnidasTestProject.Page
             TestBase.thisElement(_btnEditarCampos, action.Click);
 
 
-            TestBase.thisElement(_selTipoOportunidadeLocacao, action.Click);
+            //TestBase.thisElement(_selTipoOportunidadeLocacao, action.Click);
             TestBase.thisElement(_selSubtipoDaOpp, action.Click);
             TestBase.thisElement(_selSubtipoDaOppAcrescimo, action.Click);
             TestBase.thisElement(_selCategoriaDoDispositivo, action.Click);
