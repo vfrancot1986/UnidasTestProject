@@ -5,13 +5,17 @@ using UnidasTestProject.Settings;
 
 namespace UnidasTestProject.Test
 {
+    //Feature de Teste
+    [TestFixture, Parallelizable(ParallelScope.Fixtures)]
     public class FluxoCotacaoSF : TestBase
     {
+
         //TestCase
         [Test]
         public void TestFluxoCotacao()
         {
             //Arrange - Pré-condicao do teste
+            //Test = Extent.CreateTest(GetType().Name + "_" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
             PageLoginSF PageLoginSF = new PageLoginSF(_driver);
             PageInicioSF PageInicioSF = new PageInicioSF(_driver);
             PageContaSF PageContaSF = new PageContaSF(_driver);
@@ -22,7 +26,7 @@ namespace UnidasTestProject.Test
             string? _senha = AppSettings.PasswordQA;
 
             //Act - Acoes do teste
-            AbrirSF(_url);
+            AbrirSF(_url); //Ajustar este passo
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
             PageContaSF.NovaOportunidade();
@@ -36,6 +40,7 @@ namespace UnidasTestProject.Test
         public void OportunidadeUsuarioSemInodadeNegocio()
         {
             //Arrange - Pré-condicao do teste
+            //Test = Extent.CreateTest(GetType().Name + "_" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
             PageLoginSF PageLoginSF = new PageLoginSF(_driver);
             PageInicioSF PageInicioSF = new PageInicioSF(_driver);
             PageContaSF PageContaSF = new PageContaSF(_driver);
@@ -46,7 +51,7 @@ namespace UnidasTestProject.Test
             string? _senha = AppSettings.PasswordQA;
 
             //Act - Acoes do teste
-            AbrirSF(_url);
+            AbrirSF(_url); //Ajustar este passo
             PageLoginSF.FazerLogin(_usuario, _senha);
             PageInicioSF.PesquisarConta();
             PageContaSF.NovaOportunidade();

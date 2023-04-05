@@ -3,6 +3,7 @@ using AventStack.ExtentReports.Reporter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
@@ -25,7 +26,7 @@ namespace UnidasTestProject.Resource
         public string ExtentFileName;
         public ExtentReports Extent;
         public static ExtentTest? Test;
-        private static readonly ExtentHtmlReporter HtmlReporter = new ExtentHtmlReporter(Path.Combine(TestResultsDirectory, $"TEST_{DateTime.Now:ddMMyyyy_hhmmss}.html"));
+        private static ExtentHtmlReporter? HtmlReporter;// = new ExtentHtmlReporter(Path.Combine(TestResultsDirectory, $"TEST_{DateTime.Now:ddMMyyyy_hhmmss}.html"));
         public static Screenshot? Screenshot;
         public static string? EvidenceFileName;
         public static string? TestInfo;
@@ -52,53 +53,113 @@ namespace UnidasTestProject.Resource
             AppSettings.PasswordHOM = config["PasswordHOM"];
         }
 
-        //Antes do teste
-        [SetUp]
-        public void Initialize()
+        //Antes de todos os testes
+        [OneTimeSetUp]
+        public void Setup()
         {
+            try
+            {
+                ExtentFileName = Path.Combine(TestResultsDirectory, GetType().Name + '_' + DateTime.Now.ToString("ddMMyyyy_hhmmss") + ".html");
 
+                if (!Directory.Exists(TestResultsDirectory))
+                {
+                    Directory.CreateDirectory(TestResultsDirectory);
+                }
+
+                if (!File.Exists(ExtentFileName))
+                {
+                    File.Create(ExtentFileName);
+                }
+
+                Extent = new ExtentReports();
+                HtmlReporter = new ExtentHtmlReporter(ExtentFileName);
+                Extent.AttachReporter(HtmlReporter);
+            }
+            catch (Exception e)
+            {
+                throw (e);
+
+            }
+        }
+
+        //Antes de Cada Teste
+        [SetUp]
+        public void BeforeTest()
+        {
             // Configuracao do WebDriver
             _driver = new ChromeDriver();
             _espera = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Manage().Window.Maximize();
-                        
-            ExtentFileName = Path.Combine(TestResultsDirectory, "TEST" + '_' + DateTime.Now.ToString("ddMMyyyy_hhmmss") + ".html");
 
-            if (!Directory.Exists(TestResultsDirectory))
+            try
             {
-                Directory.CreateDirectory(TestResultsDirectory);
+                Test = Extent.CreateTest(TestContext.CurrentContext.Test.Name);
             }
-
-            if (!File.Exists(ExtentFileName))
+            catch (Exception e)
             {
-                File.Create(ExtentFileName);
+                throw (e);
             }
-
-            Extent = new ExtentReports();
-            Extent.AttachReporter(HtmlReporter);
-
-            Test = Extent.CreateTest("TEST" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
         }
 
-        public void AbrirSF(string _url)
-        {
-            _driver.Navigate().GoToUrl(_url);
-        }
-
-        //Depois do Teste
+        //depois de Cada Teste
         [TearDown]
-        public void CleanUp()
+        public void AfterTest()
         {
+            try
+            {
+                var status = TestContext.CurrentContext.Result.Outcome.Status;
+                var stacktrace = "" + TestContext.CurrentContext.Result.StackTrace + "";
+                var errorMessage = TestContext.CurrentContext.Result.Message;
+                Status logstatus;
+                switch (status)
+                {
+                    case TestStatus.Failed:
+                        logstatus = Status.Fail;                        
+                        Test.Log(logstatus, "Test ended with " + logstatus + " – " + errorMessage);
+                        break;
+                    case TestStatus.Skipped:
+                        logstatus = Status.Skip;
+                        Test.Log(logstatus, "Test ended with " + logstatus);
+                        break;
+                    default:
+                        logstatus = Status.Pass;
+                        Test.Log(logstatus, "Test ended with " + logstatus);
+                        break;
+                }
 
-            // Finalizacao do teste no ExtentReports
-            Extent.Flush();
-
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
             // Encerramento do WebDriver
             _driver.Close();
             _driver.Quit();
             ExecuteCmd("taskkill /im chromedriver.exe /f /t");
+        }
+
+        //Depois de Todos os Teste
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            try
+            {
+                // Finalizacao do teste no ExtentReports
+                Extent.Flush();
+            }
+            catch (Exception e)
+            {
+
+                throw (e);
+            }
+        }
+
+
+        public void AbrirSF(string _url)
+        {
+            _driver.Navigate().GoToUrl(_url);
         }
 
         public static void Checkpoint(bool condition, string message)
