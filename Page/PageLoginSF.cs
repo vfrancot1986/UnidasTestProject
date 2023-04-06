@@ -10,28 +10,20 @@ namespace UnidasTestProject.Page
         //Mapeamento dos elementos
         [FindsBy(How = How.Id, Using = "username")]
         [CacheLookup]
-        private IWebElement _txtNomeDoUsuario;
+        public IWebElement _txtNomeDoUsuario;
 
         [FindsBy(How = How.Id, Using = "password")]
         [CacheLookup]
-        private IWebElement _txtSenha;
+        public IWebElement _txtSenha;
 
         [FindsBy(How = How.Id, Using = "Login")]
         [CacheLookup]
-        private IWebElement _btnFacaLoginNoSandbox;
+        public IWebElement _btnFacaLoginNoSandbox;
 
         //Contrutor da classe
         public PageLoginSF(IWebDriver driver)
         {
             PageFactory.InitElements(driver, this);
-        }
-
-        //Acoes da pagina
-        public void FazerLogin(string _usuario, string _senha)
-        {
-            TestBase.thisElement(_txtNomeDoUsuario, action.SendKey, _usuario);
-            TestBase.thisElement(_txtSenha, action.SendKey, _senha);
-            TestBase.thisElement(_btnFacaLoginNoSandbox, action.Click);
         }
     }
 }

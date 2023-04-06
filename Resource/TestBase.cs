@@ -8,7 +8,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System.Diagnostics;
 using UnidasTestProject.Settings;
 
@@ -92,6 +91,7 @@ namespace UnidasTestProject.Resource
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Manage().Window.Maximize();
+            _driver.Navigate().GoToUrl(AppSettings.UrlQA);
 
             try
             {
@@ -136,7 +136,7 @@ namespace UnidasTestProject.Resource
             }
             // Encerramento do WebDriver
             _driver.Close();
-            _driver.Quit();
+            _driver.Quit();            
             ExecuteCmd("taskkill /im chromedriver.exe /f /t");
         }
 
@@ -154,12 +154,6 @@ namespace UnidasTestProject.Resource
 
                 throw (e);
             }
-        }
-
-
-        public void AbrirSF(string _url)
-        {
-            _driver.Navigate().GoToUrl(_url);
         }
 
         public static void Checkpoint(bool condition, string message)

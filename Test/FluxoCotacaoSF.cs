@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using UnidasTestProject.Page;
+using UnidasTestProject.Controller;
 using UnidasTestProject.Resource;
 using UnidasTestProject.Settings;
 
@@ -15,22 +15,19 @@ namespace UnidasTestProject.Test
         public void TestFluxoCotacao()
         {
             //Arrange - Pré-condicao do teste
-            //Test = Extent.CreateTest(GetType().Name + "_" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
-            PageLoginSF PageLoginSF = new PageLoginSF(_driver);
-            PageInicioSF PageInicioSF = new PageInicioSF(_driver);
-            PageContaSF PageContaSF = new PageContaSF(_driver);
-            PageOportunidadeSF PageOportunidadeSF = new PageOportunidadeSF(_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
+            ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new ControllerPageOportunidadeSF(_driver);
 
-            string? _url = AppSettings.UrlQA;
             string? _usuario = AppSettings.UserQA;
             string? _senha = AppSettings.PasswordQA;
 
             //Act - Acoes do teste
-            AbrirSF(_url); //Ajustar este passo
-            PageLoginSF.FazerLogin(_usuario, _senha);
-            PageInicioSF.PesquisarConta();
-            PageContaSF.NovaOportunidade();
-            PageOportunidadeSF.CadNovaOportunidade();
+            ControllerPageLoginSF.FazerLogin(_usuario, _senha);
+            ControllerPageInicioSF.PesquisarConta();
+            ControllerPageContaSF.NovaOportunidade();
+            ControllerPageOportunidadeSF.CadNovaOportunidade();
 
             //Assert - Validacao do teste
             
@@ -40,26 +37,24 @@ namespace UnidasTestProject.Test
         public void OportunidadeUsuarioSemInodadeNegocio()
         {
             //Arrange - Pré-condicao do teste
-            //Test = Extent.CreateTest(GetType().Name + "_" + DateTime.Now.ToString("ddMMyyyyThhmmss"));
-            PageLoginSF PageLoginSF = new PageLoginSF(_driver);
-            PageInicioSF PageInicioSF = new PageInicioSF(_driver);
-            PageContaSF PageContaSF = new PageContaSF(_driver);
-            PageOportunidadeSF PageOportunidadeSF = new PageOportunidadeSF(_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
+            ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new ControllerPageOportunidadeSF(_driver);
 
             string? _url = AppSettings.UrlQA;
             string? _usuario = AppSettings.UserQA;
             string? _senha = AppSettings.PasswordQA;
 
             //Act - Acoes do teste
-            AbrirSF(_url); //Ajustar este passo
-            PageLoginSF.FazerLogin(_usuario, _senha);
-            PageInicioSF.PesquisarConta();
-            PageContaSF.NovaOportunidade();
-            PageOportunidadeSF.CadNovaOportunidade();
+            ControllerPageLoginSF.FazerLogin(_usuario, _senha);
+            ControllerPageInicioSF.PesquisarConta();
+            ControllerPageContaSF.NovaOportunidade();
+            ControllerPageOportunidadeSF.CadNovaOportunidade();
 
             //Assert - Validacao do teste
 
-            Assert.IsTrue(PageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
+            Assert.IsTrue(ControllerPageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
         }
     }
 }
