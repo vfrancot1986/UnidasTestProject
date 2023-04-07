@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using UnidasTestProject.Page;
-using UnidasTestProject.Resource;
+using static UnidasTestProject.Resource.TestBase;
+using Action = UnidasTestProject.Resource.TestBase.Action;
 
 namespace UnidasTestProject.Controller
 {
@@ -17,17 +18,17 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void PesquisarConta()
         {
-            TestBase.thisElement(_PageInicioSF._btnSalesConsole, action.Click);
-            TestBase.thisElement(_PageInicioSF._cpPesquisarApp, action.Click);
-            TestBase.thisElement(_PageInicioSF._cpPesquisarApp, action.SendKey, "Sales Console");
-            TestBase.thisElement(_PageInicioSF._cpPesquisarApp, action.Enter);
-            TestBase.thisElement(_PageInicioSF._btnMenuNavegacao, action.Click);
-            TestBase.thisElement(_PageInicioSF._optContas, action.Click);
-            TestBase.thisElement(_PageInicioSF._txtCabecalhoConta, action.Click);
-            TestBase.thisElement(_PageInicioSF._cpPesquisar, action.Click);
-            TestBase.thisElement(_PageInicioSF._cpPesquisar, action.SendKey, "SEMAR SUPERMERCADO LTDA");
-            TestBase.thisElement(_PageInicioSF._cpPesquisar, action.Enter);
-            TestBase.thisElement(_PageInicioSF._linkConta, action.Click);
+            ThisElement(_PageInicioSF._btnSalesConsole, Action.Click);
+            ThisElement(_PageInicioSF._cpPesquisarApp, Action.Click);
+            ThisElement(_PageInicioSF._cpPesquisarApp, Action.SendKey, "Sales Console");
+            ThisElement(_PageInicioSF._cpPesquisarApp, Action.Enter);
+            ThisElement(_PageInicioSF._btnMenuNavegacao, Action.Click);
+            ThisElement(_PageInicioSF._optContas, Action.Click);
+            ThisElement(_PageInicioSF._txtCabecalhoConta, Action.Click);
+            ThisElement(_PageInicioSF._cpPesquisar, Action.Click);
+            ThisElement(_PageInicioSF._cpPesquisar, Action.SendKey, "SEMAR SUPERMERCADO LTDA");
+            ThisElement(_PageInicioSF._cpPesquisar, Action.Enter);
+            ThisElement(_PageInicioSF._linkConta, Action.Click);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using UnidasTestProject.Page;
-using UnidasTestProject.Resource;
+using static UnidasTestProject.Resource.TestBase;
+using Action = UnidasTestProject.Resource.TestBase.Action;
 
 namespace UnidasTestProject.Controller
 {
@@ -18,9 +19,9 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void FazerLogin(string _usuario, string _senha)
         {
-            TestBase.thisElement(_PageLoginSF._txtNomeDoUsuario, action.SendKey, _usuario);
-            TestBase.thisElement(_PageLoginSF._txtSenha, action.SendKey, _senha);
-            TestBase.thisElement(_PageLoginSF._btnFacaLoginNoSandbox, action.Click);
+            ThisElement(_PageLoginSF._txtNomeDoUsuario, Action.SendKey, _usuario);
+            ThisElement(_PageLoginSF._txtSenha, Action.SendKey, _senha);
+            ThisElement(_PageLoginSF._btnFacaLoginNoSandbox, Action.Click);
         }
     }
 }

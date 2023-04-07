@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
-using UnidasTestProject.Resource;
 using UnidasTestProject.Page;
+using static UnidasTestProject.Resource.TestBase;
+using Action = UnidasTestProject.Resource.TestBase.Action;
 
 namespace UnidasTestProject.Controller
 {
@@ -17,7 +18,7 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void NovaOportunidade()
         {
-            TestBase.thisElement(_PageContaSF._btnNovaOportunidade, action.ClickPoint);
+            ThisElement(_PageContaSF._btnNovaOportunidade, Action.ClickPoint);
         }
     }
 }

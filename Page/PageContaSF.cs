@@ -9,11 +9,11 @@ namespace UnidasTestProject.Page
         //Mapeamento dos elementos
         [FindsBy(How = How.XPath, Using = "//lightning-formatted-text[@class='custom-truncate']")]
         [CacheLookup]
-        public IWebElement _txtTituloConta;
+        public IWebElement? _txtTituloConta;
 
         [FindsBy(How = How.XPath, Using = "//span[@class='slds-var-p-right_x-small' and contains(text(), 'Contas')]")]
         [CacheLookup]
-        public IWebElement _txtPaginaContas;
+        public IWebElement? _txtPaginaContas;
 
         [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Nova Oportunidade')]")]
         [CacheLookup]
@@ -23,6 +23,6 @@ namespace UnidasTestProject.Page
         public PageContaSF(IWebDriver driver)
         {
             PageFactory.InitElements(driver, this);
-        }        
+        }
     }
 }

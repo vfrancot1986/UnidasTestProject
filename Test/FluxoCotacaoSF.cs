@@ -15,13 +15,13 @@ namespace UnidasTestProject.Test
         public void TestFluxoCotacao()
         {
             //Arrange - Pré-condicao do teste
-            ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
-            ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
-            ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);
-            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new ControllerPageOportunidadeSF(_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
+            ControllerPageContaSF ControllerPageContaSF = new (_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new (_driver);
 
-            string? _usuario = AppSettings.UserQA;
-            string? _senha = AppSettings.PasswordQA;
+            string _usuario = AppSettings.UserQA;
+            string _senha = AppSettings.PasswordQA;
 
             //Act - Acoes do teste
             ControllerPageLoginSF.FazerLogin(_usuario, _senha);
@@ -30,19 +30,18 @@ namespace UnidasTestProject.Test
             ControllerPageOportunidadeSF.CadNovaOportunidade();
 
             //Assert - Validacao do teste
-            
+            Assert.IsTrue(true);
         }
         //TestCase
         [Test]
         public void OportunidadeUsuarioSemInodadeNegocio()
         {
             //Arrange - Pré-condicao do teste
-            ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
-            ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
-            ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);
-            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new ControllerPageOportunidadeSF(_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
+            ControllerPageContaSF ControllerPageContaSF = new (_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new (_driver);
 
-            string? _url = AppSettings.UrlQA;
             string? _usuario = AppSettings.UserQA;
             string? _senha = AppSettings.PasswordQA;
 

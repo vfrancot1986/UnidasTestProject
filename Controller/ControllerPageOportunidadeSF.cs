@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using UnidasTestProject.Page;
-using UnidasTestProject.Resource;
+using static UnidasTestProject.Resource.TestBase;
+using Action = UnidasTestProject.Resource.TestBase.Action;
 
 namespace UnidasTestProject.Controller
 {
@@ -18,23 +19,23 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void CadNovaOportunidade()
         {
-            TestBase.thisElement(_PageOportunidadeSF._selTipoOportunidade, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._selTipoOportunidadeLocacao, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._selSubtipoDaOpp, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._selSubtipoDaOppAcrescimo, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._selCategoriaDoDispositivo, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF.CategoriaDoDispositivoOpcoesNovo, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._txtNomeDaOportunidade, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._txtNomeDaOportunidade, action.SendKey, "TesteAutomacao_New_OPR");
-            TestBase.thisElement(_PageOportunidadeSF._selFaseOpp2, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._optFirstContact, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._txtDataDeFechamento, action.Click);
-            TestBase.thisElement(_PageOportunidadeSF._txtDataDeFechamento, action.SendKey, "01/01/2001");
-            TestBase.thisElement(_PageOportunidadeSF._btnAvancar, action.Click);
+            ThisElement(_PageOportunidadeSF._selTipoOportunidade, Action.Click);
+            ThisElement(_PageOportunidadeSF._selTipoOportunidadeLocacao, Action.Click);
+            ThisElement(_PageOportunidadeSF._selSubtipoDaOpp, Action.Click);
+            ThisElement(_PageOportunidadeSF._selSubtipoDaOppAcrescimo, Action.Click);
+            ThisElement(_PageOportunidadeSF._selCategoriaDoDispositivo, Action.Click);
+            ThisElement(_PageOportunidadeSF.CategoriaDoDispositivoOpcoesNovo, Action.Click);
+            ThisElement(_PageOportunidadeSF._txtNomeDaOportunidade, Action.Click);
+            ThisElement(_PageOportunidadeSF._txtNomeDaOportunidade, Action.SendKey, "TesteAutomacao_New_OPR");
+            ThisElement(_PageOportunidadeSF._selFaseOpp2, Action.Click);
+            ThisElement(_PageOportunidadeSF._optFirstContact, Action.Click);
+            ThisElement(_PageOportunidadeSF._txtDataDeFechamento, Action.Click);
+            ThisElement(_PageOportunidadeSF._txtDataDeFechamento, Action.SendKey, "01/01/2001");
+            ThisElement(_PageOportunidadeSF._btnAvancar, Action.Click);
         }
         public bool ValidarMsgUsuarioNaoPossuiAreaNegocio()
         {
-            TestBase.thisElement(_PageOportunidadeSF._msgUsuarioNaoPossuiAreaNegocio, action.Wait);
+            ThisElement(_PageOportunidadeSF._msgUsuarioNaoPossuiAreaNegocio, Action.Wait);
             return true;
         }
             
