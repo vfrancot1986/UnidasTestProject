@@ -14,7 +14,7 @@ namespace UnidasTestProject.Test
         [Test]
         public void TestFluxoCotacao()
         {
-            //Arrange - Pré-condicao do teste
+            //Arrange - Pre-condicao do teste
             ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
             ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
             ControllerPageContaSF ControllerPageContaSF = new (_driver);
@@ -36,7 +36,7 @@ namespace UnidasTestProject.Test
         [Test]
         public void OportunidadeUsuarioSemInodadeNegocio()
         {
-            //Arrange - Pré-condicao do teste
+            //Arrange - Pre-condicao do teste
             ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
             ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
             ControllerPageContaSF ControllerPageContaSF = new (_driver);
