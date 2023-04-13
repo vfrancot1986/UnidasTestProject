@@ -2,7 +2,7 @@
 {
     public static class AppSettings
     {
-        public static string UrlQA { get; set; } = null!;
+        public static string? UrlQA { get; set; } = null!;
         public static string? UrlDEV { get; set; } = null!;
         public static string? UrlHOM { get; set; } = null!;
         public static string? UserQA { get; set; } = null!;

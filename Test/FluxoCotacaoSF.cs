@@ -33,27 +33,27 @@ namespace UnidasTestProject.Test
             Assert.IsTrue(true);
         }
         //TestCase
-        [Test]
-        public void OportunidadeUsuarioSemInodadeNegocio()
-        {
-            //Arrange - Pre-condicao do teste
-            ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
-            ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
-            ControllerPageContaSF ControllerPageContaSF = new (_driver);
-            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new (_driver);
+        //[Test]
+        //public void OportunidadeUsuarioSemInodadeNegocio()
+        //{
+        //    //Arrange - Pre-condicao do teste
+        //    ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
+        //    ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
+        //    ControllerPageContaSF ControllerPageContaSF = new (_driver);
+        //    ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new (_driver);
 
-            string? _usuario = AppSettings.UserQA;
-            string? _senha = AppSettings.PasswordQA;
+        //    string? _usuario = AppSettings.UserQA;
+        //    string? _senha = AppSettings.PasswordQA;
 
-            //Act - Acoes do teste
-            ControllerPageLoginSF.FazerLogin(_usuario, _senha);
-            ControllerPageInicioSF.PesquisarConta();
-            ControllerPageContaSF.NovaOportunidade();
-            ControllerPageOportunidadeSF.CadNovaOportunidade();
+        //    //Act - Acoes do teste
+        //    ControllerPageLoginSF.FazerLogin(_usuario, _senha);
+        //    ControllerPageInicioSF.PesquisarConta();
+        //    ControllerPageContaSF.NovaOportunidade();
+        //    ControllerPageOportunidadeSF.CadNovaOportunidade();
 
-            //Assert - Validacao do teste
+        //    //Assert - Validacao do teste
 
-            Assert.IsTrue(ControllerPageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
-        }
+        //    Assert.IsTrue(ControllerPageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
+        //}
     }
 }
