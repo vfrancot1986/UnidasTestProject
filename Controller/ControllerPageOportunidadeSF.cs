@@ -17,27 +17,14 @@ namespace UnidasTestProject.Controller
         }
 
         //Acoes da pagina
-        public void CadNovaOportunidade()
+        public void PrencherCamposNovaOportunidade()
         {
-            ThisElement(_PageOportunidadeSF._selTipoOportunidade, Action.Click);
-            ThisElement(_PageOportunidadeSF._selTipoOportunidadeLocacao, Action.Click);
-            ThisElement(_PageOportunidadeSF._selSubtipoDaOpp, Action.Click);
-            ThisElement(_PageOportunidadeSF._selSubtipoDaOppAcrescimo, Action.Click);
-            ThisElement(_PageOportunidadeSF._selCategoriaDoDispositivo, Action.Click);
-            ThisElement(_PageOportunidadeSF.CategoriaDoDispositivoOpcoesNovo, Action.Click);
-            ThisElement(_PageOportunidadeSF._txtNomeDaOportunidade, Action.Click);
-            ThisElement(_PageOportunidadeSF._txtNomeDaOportunidade, Action.SendKey, "TesteAutomacao_New_OPR");
-            ThisElement(_PageOportunidadeSF._selFaseOpp2, Action.Click);
-            ThisElement(_PageOportunidadeSF._optFirstContact, Action.Click);
-            ThisElement(_PageOportunidadeSF._txtDataDeFechamento, Action.Click);
-            ThisElement(_PageOportunidadeSF._txtDataDeFechamento, Action.SendKey, "01/01/2001");
-            ThisElement(_PageOportunidadeSF._btnAvancar, Action.Click);
+            ThisElement(_PageOportunidadeSF._btnEditNmOportunidade, Action.Click);
+
         }
-        public bool ValidarMsgUsuarioNaoPossuiAreaNegocio()
+        public void CadNovaCatacao()
         {
-            ThisElement(_PageOportunidadeSF._msgUsuarioNaoPossuiAreaNegocio, Action.Wait);
-            return true;
-        }
-            
+
+        }   
     }
 }

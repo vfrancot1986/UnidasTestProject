@@ -18,7 +18,8 @@ namespace UnidasTestProject.Test
             ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
             ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
             ControllerPageContaSF ControllerPageContaSF = new (_driver);
-            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new (_driver);
+            ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new (_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new(_driver);
 
             string _usuario = AppSettings.UserQA;
             string _senha = AppSettings.PasswordQA;
@@ -27,7 +28,8 @@ namespace UnidasTestProject.Test
             ControllerPageLoginSF.FazerLogin(_usuario, _senha);
             ControllerPageInicioSF.PesquisarConta();
             ControllerPageContaSF.NovaOportunidade();
-            ControllerPageOportunidadeSF.CadNovaOportunidade();
+            ControllerPageOportunidadeCadSF.CadNovaOportunidade();
+            ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
 
             //Assert - Validacao do teste
             Assert.IsTrue(true);

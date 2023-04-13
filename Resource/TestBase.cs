@@ -86,8 +86,8 @@ namespace UnidasTestProject.Resource
         {
             // Configuracao do WebDriver
             _driver = new ChromeDriver();
-            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(100);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(100);
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(AppSettings.UrlQA);
 
