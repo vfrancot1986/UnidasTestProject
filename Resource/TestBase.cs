@@ -7,6 +7,7 @@ using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System.Diagnostics.CodeAnalysis;
 using UnidasTestProject.Settings;
 
@@ -86,8 +87,8 @@ namespace UnidasTestProject.Resource
         {
             // Configuracao do WebDriver
             _driver = new ChromeDriver();
-            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(100);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(100);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
             _driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(AppSettings.UrlQA);
 
@@ -161,9 +162,7 @@ namespace UnidasTestProject.Resource
         }
 
         public static void Checkpoint(bool condition, string message)
-        {
-
-            Thread.Sleep(1000);
+        {   
             if (IsNotNull(_driver))
             {
                 Screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
@@ -189,7 +188,12 @@ namespace UnidasTestProject.Resource
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
             try
+                
             {
+                Thread.Sleep(2000);
+                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+                element = wait.Until(driver => element);
+                
                 if (IsNotNull(element) && element .Displayed && element.Enabled)
                 {
                     switch (action)
