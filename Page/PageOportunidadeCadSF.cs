@@ -8,9 +8,13 @@ namespace UnidasTestProject.Page
     {
 
         //Mapeamento dos elementos
-        [FindsBy(How = How.XPath, Using = "//button[@title='Editar Nome da oportunidade']")]
+        [FindsBy(How = How.XPath, Using = "//*[@name='TipoDeOportunidade']")]
         [CacheLookup]
-        public IWebElement? _btnEditarCampos;
+        public IWebElement? _selTipoDaOpp;
+
+        [FindsBy(How = How.XPath, Using = "//*[@value='TipoDaOppOpcoes.Locação']")]
+        [CacheLookup]
+        public IWebElement? _selTipoDaOppLocacao;
 
         [FindsBy(How = How.XPath, Using = "//input[@name='PrazoContratual__c']")]
         [CacheLookup]

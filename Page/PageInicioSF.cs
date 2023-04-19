@@ -19,7 +19,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _btnMenuNavegacao;
 
-        [FindsBy(How = How.XPath, Using = "//a[@data-label='Contas']")]
+        [FindsBy(How = How.XPath, Using = "//a[@title='Contas']")]
         [CacheLookup]
         public IWebElement? _optContas;
 

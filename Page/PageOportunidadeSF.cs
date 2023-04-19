@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using UnidasTestProject.Resource;
 
 namespace UnidasTestProject.Page
 {
