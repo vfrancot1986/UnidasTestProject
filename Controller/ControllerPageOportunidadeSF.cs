@@ -22,7 +22,7 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageOportunidadeSF._btnEditNmOportunidade, Action.Click);
 
         }
-        public void CadNovaCatacao()
+        public void CadNovaCotacao()
         {
 
         }   

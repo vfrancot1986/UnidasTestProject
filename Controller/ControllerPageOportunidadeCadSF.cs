@@ -19,7 +19,7 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void CadNovaOportunidade()
         {
-            ThisElement(_PageOportunidadeCadSF._btnEditarCampos, Action.Click);
+            //ThisElement(_PageOportunidadeCadSF._btnEditarCampos, Action.Click);
             ThisElement(_PageOportunidadeCadSF._selSubtipoDaOpp, Action.Click);
             ThisElement(_PageOportunidadeCadSF._selSubtipoDaOppAcrescimo, Action.Click);
             ThisElement(_PageOportunidadeCadSF._selCategoriaDoDispositivo, Action.Click);
