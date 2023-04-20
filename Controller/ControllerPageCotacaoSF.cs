@@ -5,31 +5,21 @@ using Action = UnidasTestProject.Resource.TestBase.Action;
 
 namespace UnidasTestProject.Controller
 {
-    public class ControllerPageOportunidadeSF
+    public class ControllerPageCotacaoSF
     {
 
         //Declaracao de variaveis
-        public PageOportunidadeSF _PageOportunidadeSF;
+        public PageCotacaoSF _PageCotacaoSF;
         //Contrutor da classe
-        public ControllerPageOportunidadeSF(IWebDriver driver)
+        public ControllerPageCotacaoSF(IWebDriver driver)
         {
-            _PageOportunidadeSF = new PageOportunidadeSF(driver);
+            _PageCotacaoSF = new PageCotacaoSF(driver);
         }
 
         //Acoes da pagina
-        public void PrencherCamposNovaOportunidade()
+        public void PrencherCamposCotacao()
         {
             ThisElement(_PageOportunidadeSF._btnEditOportunidade, Action.ClickPoint);
-            ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.Click);
-            ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.SendKey,"60");
-            ThisElement(_PageOportunidadeSF._cmbChanceFechamentoNenhum, Action.Click);
-            ThisElement(_PageOportunidadeSF._cmbChanceFechamentoAlta, Action.Click);
-            ThisElement(_PageOportunidadeSF._btnSalvar, Action.Click);
-
-        }
-        public void CadNovaCotacao()
-        {
-            ThisElement(_PageOportunidadeSF._btnNovaCotacao, Action.ClickPoint);
-        }   
+        }  
     }
 }
