@@ -191,7 +191,7 @@ namespace UnidasTestProject.Resource
                 
             {
                 Thread.Sleep(3000);
-                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+                WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(15));
                 element = wait.Until(driver => element);
                 
                 switch (action)

@@ -30,6 +30,7 @@ namespace UnidasTestProject.Test
             ControllerPageContaSF.NovaOportunidade();
             ControllerPageOportunidadeCadSF.CadNovaOportunidade();
             ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
+            ControllerPageOportunidadeSF.CadNovaCotacao();
 
             //Assert - Validacao do teste
             Assert.IsTrue(true);
