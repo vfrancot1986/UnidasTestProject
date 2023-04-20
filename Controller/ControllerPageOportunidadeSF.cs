@@ -19,7 +19,7 @@ namespace UnidasTestProject.Controller
         //Acoes da pagina
         public void PrencherCamposNovaOportunidade()
         {
-            ThisElement(_PageOportunidadeSF._btnEditOportunidade, Action.DoubleClick);
+            ThisElement(_PageOportunidadeSF._btnEditOportunidade, Action.ClickPoint);
             ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.Click);
             ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.SendKey,"60");
             ThisElement(_PageOportunidadeSF._cmbChanceFechamentoNenhum, Action.Click);

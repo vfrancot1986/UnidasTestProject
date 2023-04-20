@@ -19,9 +19,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _btnNovaCotacao;
 
-        //span[contains(text(), 'Editar Prazo contratual]')
-        //records-record-layout-item[@field-label='Prazo contratual']
-        [FindsBy(How = How.XPath, Using = "//records-record-layout-item[@field-label='Prazo contratual']")]
+        [FindsBy(How = How.XPath, Using = "//button[@title='Editar Prazo contratual']")]
         [CacheLookup]
         public IWebElement? _btnEditOportunidade;
 
@@ -29,19 +27,19 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _txtNmOportunidade;
 
-        [FindsBy(How = How.XPath, Using = "//input[@name='PrazoContratual__c]")]
+        [FindsBy(How = How.XPath, Using = "//input[@name='PrazoContratual__c']")]
         [CacheLookup]
         public IWebElement? _txtPrazoContratual;
 
-        [FindsBy(How = How.XPath, Using = "//button[@aria-label='Chance de fechamento, --Nenhum--")]
+        [FindsBy(How = How.XPath, Using = "//button[@aria-label='Chance de fechamento, --Nenhum--']")]
         [CacheLookup]
         public IWebElement? _cmbChanceFechamentoNenhum;
 
-        [FindsBy(How = How.XPath, Using = "//button[@aria-label='Chance de fechamento, --Alta--")]
+        [FindsBy(How = How.XPath, Using = "//lightning-base-combobox-item[@data-value='Alta']")]
         [CacheLookup]
         public IWebElement? _cmbChanceFechamentoAlta;
 
-        [FindsBy(How = How.XPath, Using = "//button[@name='SaveEdit")]
+        [FindsBy(How = How.XPath, Using = "//button[@name='SaveEdit']")]
         [CacheLookup]
         public IWebElement? _btnSalvar;
 

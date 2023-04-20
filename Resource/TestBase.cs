@@ -190,7 +190,7 @@ namespace UnidasTestProject.Resource
             try
                 
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(3000);
                 WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
                 element = wait.Until(driver => element);
                 
@@ -200,16 +200,16 @@ namespace UnidasTestProject.Resource
                         element.Click();
                         break;
                     case Action.ClickPoint:
-                        new Actions(_driver).MoveToElement(element).Click().Build().Perform();
+                        new Actions(_driver).MoveToElement(element).Click().Perform();
                         break;
                     case Action.DoubleClick:
-                        new Actions(_driver).DoubleClick(element).Build().Perform();
+                        new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
                         break;
                     case Action.DoubleClickJs:
-                        Utils.RunJavaScript(_driver, element, "arguments[0].dblclick()");
+                        Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
                         break;
                     case Action.ClickJs:
-                        Utils.RunJavaScript(_driver, element, "arguments[0].click()");
+                        Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
                         break;
                     case Action.SendKey:
                         element.SendKeys(text);
