@@ -30,7 +30,7 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageOportunidadeCadSF._selFaseOpp2, Action.Click);
             ThisElement(_PageOportunidadeCadSF._optFirstContact, Action.Click);
             ThisElement(_PageOportunidadeCadSF._txtDataDeFechamento, Action.Click);
-            ThisElement(_PageOportunidadeCadSF._txtDataDeFechamento, Action.SendKey, "20/04/2023");
+            ThisElement(_PageOportunidadeCadSF._txtDataDeFechamento, Action.SendKey, $"{DateTime.Now:dd/MM/yyyy}");
             ThisElement(_PageOportunidadeCadSF._btnAvancar, Action.Click);
         }
         public bool ValidarMsgUsuarioNaoPossuiAreaNegocio()

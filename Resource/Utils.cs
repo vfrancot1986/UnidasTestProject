@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using OpenQA.Selenium;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace UnidasTestProject.Resource
 {
@@ -23,6 +25,11 @@ namespace UnidasTestProject.Resource
             Thread.Sleep(3000);
 
             return list;
+        }
+        public static void RunJavaScript(IWebDriver driver, IWebElement? element, string javascript)
+        {
+            IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
+            jsExecutor.ExecuteScript(javascript, element); 
         }
     }
 }

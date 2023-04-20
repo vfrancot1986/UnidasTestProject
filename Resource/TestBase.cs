@@ -28,7 +28,7 @@ namespace UnidasTestProject.Resource
         private static string? EvidenceFileName;
         private static string? TestInfo;
         private static readonly string Logger = string.Empty;
-        public enum Action{ Click, ClickPoint, SendKey, Clear, Submit, Wait, Enter }
+        public enum Action{ Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
         //Construtor
         protected TestBase()
         {
@@ -194,37 +194,39 @@ namespace UnidasTestProject.Resource
                 WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
                 element = wait.Until(driver => element);
                 
-                if (IsNotNull(element) && element .Displayed && element.Enabled)
+                switch (action)
                 {
-                    switch (action)
-                    {
-                        case Action.Click:
-                            element.Click();
-                            break;
-                        case Action.ClickPoint:
-                            new Actions(_driver).MoveToElement(element).Click().Build().Perform();
-                            break;
-                        case Action.SendKey:
-                            element.SendKeys(text);
-                            break;
-                        case Action.Clear:
-                            element.Clear();
-                            break;
-                        case Action.Submit:
-                            element.Submit();
-                            break;
-                        case Action.Enter:
-                            element.SendKeys(Keys.Enter);
-                            break;
-                        case Action.Wait:
-                            break;
-                    }
-                    Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
+                    case Action.Click:
+                        element.Click();
+                        break;
+                    case Action.ClickPoint:
+                        new Actions(_driver).MoveToElement(element).Click().Build().Perform();
+                        break;
+                    case Action.DoubleClick:
+                        new Actions(_driver).DoubleClick(element).Build().Perform();
+                        break;
+                    case Action.DoubleClickJs:
+                        Utils.RunJavaScript(_driver, element, "arguments[0].dblclick()");
+                        break;
+                    case Action.ClickJs:
+                        Utils.RunJavaScript(_driver, element, "arguments[0].click()");
+                        break;
+                    case Action.SendKey:
+                        element.SendKeys(text);
+                        break;
+                    case Action.Clear:
+                        element.Clear();
+                        break;
+                    case Action.Submit:
+                        element.Submit();
+                        break;
+                    case Action.Enter:
+                        element.SendKeys(Keys.Enter);
+                        break;
+                    case Action.Wait:
+                        break;
                 }
-                else
-                {
-                    Checkpoint(false, "Acao invalida para o elemento");
-                }
+                Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
             }
             catch (NoSuchElementException e)
             {
