@@ -8,6 +8,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System.Diagnostics.CodeAnalysis;
 using UnidasTestProject.Settings;
 
@@ -50,9 +51,9 @@ namespace UnidasTestProject.Resource
                 AppSettings.PasswordQA = config["PasswordQA"];
                 AppSettings.PasswordDEV = config["PasswordDEV"];
                 AppSettings.PasswordHOM = config["PasswordHOM"];
-                AppSettings.PrazoContratual = config["PrazoContratual"] + _timeStamp;
-                AppSettings.NmCotacao = config["NmCotacao"];
-                AppSettings.NmOportunidade = config["NmCotacao"] + _timeStamp;
+                AppSettings.PrazoContratual = config["PrazoContratual"];
+                AppSettings.NmCotacao = config["NmCotacao"] + _timeStamp;
+                AppSettings.NmOportunidade = config["NmOportunidade"] + _timeStamp;
             }
         }
 
@@ -193,45 +194,57 @@ namespace UnidasTestProject.Resource
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
             try
-                
+
             {
+                IWebElement _element = WaitForElementToBeVisible(element);
                 Thread.Sleep(3000);
-                WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(15));
-                element = wait.Until(driver => element);
-                
-                switch (action)
+                //WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(15));
+                //element = wait.Until(driver => element);
+                bool staleElement = true;
+                while (staleElement)
                 {
-                    case Action.Click:
-                        element.Click();
-                        break;
-                    case Action.ClickPoint:
-                        new Actions(_driver).MoveToElement(element).Click().Perform();
-                        break;
-                    case Action.DoubleClick:
-                        new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
-                        break;
-                    case Action.DoubleClickJs:
-                        Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
-                        break;
-                    case Action.ClickJs:
-                        Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
-                        break;
-                    case Action.SendKey:
-                        element.SendKeys(text);
-                        break;
-                    case Action.Clear:
-                        element.Clear();
-                        break;
-                    case Action.Submit:
-                        element.Submit();
-                        break;
-                    case Action.Enter:
-                        element.SendKeys(Keys.Enter);
-                        break;
-                    case Action.Wait:
-                        break;
+                    try
+                    {
+                        switch (action)
+                        {
+                            case Action.Click:
+                                _element.Click();
+                                break;
+                            case Action.ClickPoint:
+                                new Actions(_driver).MoveToElement(_element).Click().Perform();
+                                break;
+                            case Action.DoubleClick:
+                                new Actions(_driver).MoveToElement(_element).DoubleClick().Perform();
+                                break;
+                            case Action.DoubleClickJs:
+                                Utils.RunJavaScript(_driver, _element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
+                                break;
+                            case Action.ClickJs:
+                                Utils.RunJavaScript(_driver, _element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
+                                break;
+                            case Action.SendKey:
+                                _element.SendKeys(text);
+                                break;
+                            case Action.Clear:
+                                _element.Clear();
+                                break;
+                            case Action.Submit:
+                                _element.Submit();
+                                break;
+                            case Action.Enter:
+                                _element.SendKeys(Keys.Enter);
+                                break;
+                            case Action.Wait:
+                                break;
+                        }
+                        staleElement = false;
+                        Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
+                    }
+                    catch (StaleElementReferenceException e)
+                    {
+                        staleElement = false;
+                    }
                 }
-                Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
             }
             catch (NoSuchElementException e)
             {
@@ -242,6 +255,14 @@ namespace UnidasTestProject.Resource
                 Checkpoint(false, "An unexpected error occurred: " + e.Message);
             }
         }
+        public static IWebElement WaitForElementToBeVisible(IWebElement element)
+        {
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
+            element = wait.Until(_driver => element);            
+            return wait.Until(ExpectedConditions.ElementToBeClickable(element));
+        }
+
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
     }
 }

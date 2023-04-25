@@ -25,7 +25,7 @@ namespace UnidasTestProject.Test
             string _usuario = AppSettings.UserQA;
             string _senha = AppSettings.PasswordQA;
             string _nmOportunidade = AppSettings.NmOportunidade;
-            string _nmCotacacao = AppSettings.NmCotacao;
+            string _nmCotacao = AppSettings.NmCotacao;
             string _prazoContrautual = AppSettings.PrazoContratual;
 
             //Act - Acoes do teste
@@ -35,7 +35,7 @@ namespace UnidasTestProject.Test
             ControllerPageOportunidadeCadSF.CadNovaOportunidade(_nmOportunidade);
             ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
             ControllerPageOportunidadeSF.CadNovaCotacao();
-            ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacacao, _prazoContrautual);
+            ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
 
             //Assert - Validacao do teste
             Assert.IsTrue(true);
