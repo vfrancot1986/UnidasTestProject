@@ -198,8 +198,6 @@ namespace UnidasTestProject.Resource
             {
                 IWebElement _element = WaitForElementToBeVisible(element);
                 Thread.Sleep(3000);
-                //WebDriverWait wait = new(_driver, TimeSpan.FromSeconds(15));
-                //element = wait.Until(driver => element);
                 bool staleElement = true;
                 while (staleElement)
                 {
