@@ -12,5 +12,11 @@
         public static string? PasswordDEV { get; set; } = null!;
         public static string? PasswordHOM { get; set; } = null!;
 
+        public static string? PrazoContratual { get; set; } = null!;
+
+        public static string? NmCotacao { get; set; } = null!;
+
+        public static string? NmOportunidade { get; set; } = null!;
+
     }
 }

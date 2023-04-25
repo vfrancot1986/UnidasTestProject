@@ -17,7 +17,7 @@ namespace UnidasTestProject.Controller
         }
 
         //Acoes da pagina
-        public void CadNovaOportunidade()
+        public void CadNovaOportunidade(string nmOportunidade)
         {
             ThisElement(_PageOportunidadeCadSF._selTipoDaOpp, Action.Click);
             ThisElement(_PageOportunidadeCadSF._selTipoDaOppLocacao, Action.Click);
@@ -26,7 +26,7 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageOportunidadeCadSF._selCategoriaDoDispositivo, Action.Click);
             ThisElement(_PageOportunidadeCadSF.CategoriaDoDispositivoOpcoesNovo, Action.Click);
             ThisElement(_PageOportunidadeCadSF._txtNomeDaOportunidade, Action.Click);
-            ThisElement(_PageOportunidadeCadSF._txtNomeDaOportunidade, Action.SendKey, "TesteAutomacao_New_OPR" + $"{DateTime.Now:ddMMyyyyThhmmss}");
+            ThisElement(_PageOportunidadeCadSF._txtNomeDaOportunidade, Action.SendKey, nmOportunidade);
             ThisElement(_PageOportunidadeCadSF._selFaseOpp2, Action.Click);
             ThisElement(_PageOportunidadeCadSF._optFirstContact, Action.Click);
             ThisElement(_PageOportunidadeCadSF._txtDataDeFechamento, Action.Click);

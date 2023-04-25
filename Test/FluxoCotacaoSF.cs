@@ -20,17 +20,22 @@ namespace UnidasTestProject.Test
             ControllerPageContaSF ControllerPageContaSF = new (_driver);
             ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new (_driver);
             ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new(_driver);
+            ControllerPageCotacaoSF ControllerPageCatacaoSF = new(_driver);
 
             string _usuario = AppSettings.UserQA;
             string _senha = AppSettings.PasswordQA;
+            string _nmOportunidade = AppSettings.NmOportunidade;
+            string _nmCotacacao = AppSettings.NmCotacao;
+            string _prazoContrautual = AppSettings.PrazoContratual;
 
             //Act - Acoes do teste
             ControllerPageLoginSF.FazerLogin(_usuario, _senha);
             ControllerPageInicioSF.PesquisarConta();
             ControllerPageContaSF.NovaOportunidade();
-            ControllerPageOportunidadeCadSF.CadNovaOportunidade();
+            ControllerPageOportunidadeCadSF.CadNovaOportunidade(_nmOportunidade);
             ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
             ControllerPageOportunidadeSF.CadNovaCotacao();
+            ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacacao, _prazoContrautual);
 
             //Assert - Validacao do teste
             Assert.IsTrue(true);

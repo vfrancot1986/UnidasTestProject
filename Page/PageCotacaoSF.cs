@@ -7,10 +7,18 @@ namespace UnidasTestProject.Page
     {
 
         //Mapeamento dos elementos
-        [FindsBy(How = How.XPath, Using = "//div[contains(text(), 'Oportunidade')]")]
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(), 'Nome de Cotação')]//following::input[1]")]
         [CacheLookup]
-        public IWebElement? _cabOportunidade;
-  
+        public IWebElement? _txtNomeCotacao;
+
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(), 'Nome de Cotação')]//following::input[5]")]
+        [CacheLookup]
+        public IWebElement? _txtPrazoContratual;
+
+        [FindsBy(How = How.XPath, Using = "//button[@title='Salvar']")]
+        [CacheLookup]
+        public IWebElement? _btnSalvar;        
+
         //Contrutor da classe
         public PageCotacaoSF(IWebDriver driver)
         {

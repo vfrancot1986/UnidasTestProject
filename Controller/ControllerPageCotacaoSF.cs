@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using MongoDB.Bson.Serialization.Serializers;
+using OpenQA.Selenium;
 using UnidasTestProject.Page;
 using static UnidasTestProject.Resource.TestBase;
 using Action = UnidasTestProject.Resource.TestBase.Action;
@@ -17,9 +18,11 @@ namespace UnidasTestProject.Controller
         }
 
         //Acoes da pagina
-        public void PrencherCamposCotacao()
+        public void PrencherCamposCotacao(string nmCotacao, string prazoContratual)
         {
-            ThisElement(_PageOportunidadeSF._btnEditOportunidade, Action.ClickPoint);
+            ThisElement(_PageCotacaoSF._txtNomeCotacao, Action.SendKey, nmCotacao);
+            ThisElement(_PageCotacaoSF._txtPrazoContratual, Action.SendKey, prazoContratual);
+            ThisElement(_PageCotacaoSF._btnSalvar, Action.Click);
         }  
     }
 }

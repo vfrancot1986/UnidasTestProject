@@ -18,8 +18,9 @@ namespace UnidasTestProject.Resource
     {
         //Declaracao de variaveis
         public static IWebDriver _driver = null!;
+        private static string _timeStamp = $"{DateTime.Now:ddMMyyyyThhmmss}";
         public ServiceProvider ServiceProvider { get; }
-        private static readonly string TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_{DateTime.Now:ddMMyyyyThhmmss}");
+        private static readonly string TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_" + _timeStamp);
         public string ExtentFileName = null!;
         public ExtentReports Extent = null!;
         private static ExtentTest? Test;
@@ -49,6 +50,9 @@ namespace UnidasTestProject.Resource
                 AppSettings.PasswordQA = config["PasswordQA"];
                 AppSettings.PasswordDEV = config["PasswordDEV"];
                 AppSettings.PasswordHOM = config["PasswordHOM"];
+                AppSettings.PrazoContratual = config["PrazoContratual"] + _timeStamp;
+                AppSettings.NmCotacao = config["NmCotacao"];
+                AppSettings.NmOportunidade = config["NmCotacao"] + _timeStamp;
             }
         }
 
@@ -58,7 +62,7 @@ namespace UnidasTestProject.Resource
         {
             try
             {
-                ExtentFileName = Path.Combine(TestResultsDirectory, GetType().Name + '_' + DateTime.Now.ToString("ddMMyyyy_hhmmss") + ".html");
+                ExtentFileName = Path.Combine(TestResultsDirectory, GetType().Name + '_' + _timeStamp + ".html");
 
                 if (!Directory.Exists(TestResultsDirectory))
                 {
@@ -165,8 +169,9 @@ namespace UnidasTestProject.Resource
         {   
             if (IsNotNull(_driver))
             {
+                _timeStamp = $"{DateTime.Now:ddMMyyyyThhmmss}";
                 Screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
-                EvidenceFileName = Path.Combine(TestResultsDirectory, "evidence" + DateTime.Now.ToString("ddMMyyyyThhmmss") + ".png");
+                EvidenceFileName = Path.Combine(TestResultsDirectory, "evidence" + _timeStamp + ".png");
                 Screenshot.SaveAsFile(EvidenceFileName, ScreenshotImageFormat.Png);
             }
             TestInfo = Logger + message;
