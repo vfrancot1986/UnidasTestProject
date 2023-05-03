@@ -24,11 +24,10 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageInicioSF._cpPesquisarApp, Action.Enter);
             ThisElement(_PageInicioSF._btnMenuNavegacao, Action.Click);
             ThisElement(_PageInicioSF._optContas, Action.Click);
-            //ThisElement(_PageInicioSF._txtCabecalhoConta, Action.Click);
+            ThisElement(_PageInicioSF._txtCabecalhoConta, Action.Click);
             ThisElement(_PageInicioSF._txtCabecalhoConta, Action.Click);
             ThisElement(_PageInicioSF._cpPesquisar, Action.Click);
             ThisElement(_PageInicioSF._cpPesquisar, Action.SendKey, "SEMAR SUPERMERCADO LTDA");
-            ThisElement(_PageInicioSF._cpPesquisar, Action.Enter);
             ThisElement(_PageInicioSF._linkConta, Action.Click);
             
         }

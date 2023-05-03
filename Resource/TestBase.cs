@@ -196,8 +196,8 @@ namespace UnidasTestProject.Resource
             try
 
             {
-                IWebElement _element = WaitForElementToBeVisible(element);
-                Thread.Sleep(3000);
+                //IWebElement _element = WaitForElementToBeVisible(element);
+                Thread.Sleep(5000);
                 bool staleElement = true;
                 while (staleElement)
                 {
@@ -206,31 +206,31 @@ namespace UnidasTestProject.Resource
                         switch (action)
                         {
                             case Action.Click:
-                                _element.Click();
+                                element.Click();
                                 break;
                             case Action.ClickPoint:
-                                new Actions(_driver).MoveToElement(_element).Click().Perform();
+                                new Actions(_driver).MoveToElement(element).Click().Perform();
                                 break;
                             case Action.DoubleClick:
-                                new Actions(_driver).MoveToElement(_element).DoubleClick().Perform();
+                                new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
                                 break;
                             case Action.DoubleClickJs:
-                                Utils.RunJavaScript(_driver, _element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
+                                Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
                                 break;
                             case Action.ClickJs:
-                                Utils.RunJavaScript(_driver, _element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
+                                Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
                                 break;
                             case Action.SendKey:
-                                _element.SendKeys(text);
+                                element.SendKeys(text);
                                 break;
                             case Action.Clear:
-                                _element.Clear();
+                                element.Clear();
                                 break;
                             case Action.Submit:
-                                _element.Submit();
+                                element.Submit();
                                 break;
                             case Action.Enter:
-                                _element.SendKeys(Keys.Enter);
+                                element.SendKeys(Keys.Enter);
                                 break;
                             case Action.Wait:
                                 break;
