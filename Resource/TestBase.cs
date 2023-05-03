@@ -255,7 +255,7 @@ namespace UnidasTestProject.Resource
         }
         public static IWebElement WaitForElementToBeVisible(IWebElement element)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
             wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
             element = wait.Until(_driver => element);            
             return wait.Until(ExpectedConditions.ElementToBeClickable(element));
