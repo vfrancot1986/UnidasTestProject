@@ -23,6 +23,7 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageCotacaoSF._txtNomeCotacao, Action.SendKey, nmCotacao);
             ThisElement(_PageCotacaoSF._txtPrazoContratual, Action.SendKey, prazoContratual);
             ThisElement(_PageCotacaoSF._btnSalvar, Action.Click);
-        }  
+        }
+        
     }
 }
