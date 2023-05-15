@@ -209,7 +209,6 @@ namespace UnidasTestProject.Resource
             try
 
             {
-                IWebElement _element = WaitForElementToBeVisible(element);
                 Thread.Sleep(3000);
                 bool staleElement = true;
                 while (staleElement)
