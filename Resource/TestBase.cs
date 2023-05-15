@@ -54,6 +54,19 @@ namespace UnidasTestProject.Resource
                 AppSettings.PrazoContratual = config["PrazoContratual"];
                 AppSettings.NmCotacao = config["NmCotacao"] + _timeStamp;
                 AppSettings.NmOportunidade = config["NmOportunidade"] + _timeStamp;
+                AppSettings.Produto = config["Produto"];
+                AppSettings.TpRodagem = config["TpRodagem"];
+                AppSettings.Quantidade = config["Quantidade"];
+                AppSettings.TipoUso = config["TipoUso"];
+                AppSettings.ValorVenda = config["ValorVenda"];
+                AppSettings.UsoMensal = config["UsoMensal"];
+                AppSettings.UfEntrega = config["UfEntrega"];
+                AppSettings.PMunicipioEntrega = config["PMunicipioEntrega "];
+                AppSettings.QtdPneus = config["QtdPneus"];
+                AppSettings.Manutencao = config["Manutencao"];
+                AppSettings.Grupo = config["Grupo"];
+                AppSettings.TpReserva = config["TpReserva"];
+                AppSettings.QtdDiariaReserva = config["QtdDiariaReserva"];
             }
         }
 

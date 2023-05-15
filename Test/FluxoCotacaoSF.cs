@@ -27,6 +27,19 @@ namespace UnidasTestProject.Test
             string _nmOportunidade = AppSettings.NmOportunidade;
             string _nmCotacao = AppSettings.NmCotacao;
             string _prazoContrautual = AppSettings.PrazoContratual;
+            string _produto = AppSettings.Produto;
+            string _tpRodagem = AppSettings.TpRodagem;
+            string _quantidade = AppSettings.Quantidade;
+            string _tipoUso = AppSettings.TipoUso;
+            string _valorVenda = AppSettings.ValorVenda;
+            string _usoMensal = AppSettings.UsoMensal;
+            string _ufEntrega = AppSettings.UfEntrega;
+            string _pMunicipioEntrega = AppSettings.PMunicipioEntrega;
+            string _qtdPneus = AppSettings.QtdPneus;
+            string _manutencao = AppSettings.Manutencao;
+            string _grupo = AppSettings.Grupo;
+            string _tpReserva = AppSettings.TpReserva;
+            string _qtdDiariaReserva = AppSettings.QtdDiariaReserva;
 
             //Act - Acoes do teste
             ControllerPageLoginSF.FazerLogin(_usuario, _senha);
@@ -36,7 +49,8 @@ namespace UnidasTestProject.Test
             ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
             ControllerPageOportunidadeSF.CadNovaCotacao();
             ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
-
+            ControllerPageCatacaoSF.FinalizarCotacao(_produto);
+            ControllerPageCatacaoSF.PreencherItensLinhaCotacao(_tpRodagem, _quantidade, _tipoUso, _valorVenda, _usoMensal, _ufEntrega, _pMunicipioEntrega, _qtdPneus, _manutencao, _grupo, _tpReserva, _qtdDiariaReserva);
             //Assert - Validacao do teste
             Assert.IsTrue(true);
         }

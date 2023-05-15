@@ -17,6 +17,18 @@
         public static string? NmCotacao { get; set; } = null!;
 
         public static string? NmOportunidade { get; set; } = null!;
-
+        public static string? Produto { get; set; } = null!;
+        public static string? TpRodagem { get; set; } = null!;
+        public static string? Quantidade { get; set; } = null!;
+        public static string? TipoUso { get; set; } = null!;
+        public static string? ValorVenda { get; set; } = null!;
+        public static string? UsoMensal { get; set; } = null!;
+        public static string? UfEntrega { get; set; } = null!;
+        public static string? PMunicipioEntrega { get; set; } = null!;
+        public static string? QtdPneus { get; set; } = null!;
+        public static string? Manutencao { get; set; } = null!;
+        public static string? Grupo { get; set; } = null!;
+        public static string? TpReserva { get; set; } = null!;
+        public static string? QtdDiariaReserva { get; set; } = null!;
     }
 }
