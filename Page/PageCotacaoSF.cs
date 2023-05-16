@@ -30,8 +30,9 @@ namespace UnidasTestProject.Page
         [FindsBy(How = How.XPath, Using = "//input[@role='combobox']")]
         [CacheLookup]
         public IWebElement? _FiltrarProdutos;
-
-        [FindsBy(How = How.XPath, Using = "//td[@tabindex='-1']//input[@tabindex='0']")]
+        //td[@tabindex='-1']//input[@tabindex='0']//following::label//span[@class='slds-assistive-text']
+        //td[@tabindex='-1']//input[@tabindex='0']//following::label//span[contains(text(), 'Selecionar item 1')]
+        [FindsBy(How = How.XPath, Using = "//td[@tabindex='-1']//input[@tabindex='0']//following::label")]
         [CacheLookup]
         public IWebElement? _SelecionarProduto;
 

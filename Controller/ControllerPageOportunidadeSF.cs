@@ -22,6 +22,8 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageOportunidadeSF._btnEditOportunidade, Action.ClickPoint);
             ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.Click);
             ThisElement(_PageOportunidadeSF._txtPrazoContratual, Action.SendKey,"60");
+            ThisElement(_PageOportunidadeSF._txtRegional, Action.Click);
+            ThisElement(_PageOportunidadeSF._txtRegionalHunters3, Action.Click);
             ThisElement(_PageOportunidadeSF._cmbChanceFechamentoNenhum, Action.Click);
             ThisElement(_PageOportunidadeSF._cmbChanceFechamentoAlta, Action.Click);
             ThisElement(_PageOportunidadeSF._btnSalvar, Action.Click);
