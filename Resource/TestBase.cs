@@ -104,10 +104,18 @@ namespace UnidasTestProject.Resource
         public void BeforeTest()
         {
             // Configuracao do WebDriver
-            _driver = new ChromeDriver();
-            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(15);
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments( "start-maximized",
+                                        "enable-automation",                                        
+                                        "--no-sandbox",
+                                        "--disable-infobars",
+                                        "--disable-dev-shm-usage",
+                                        "--disable-browser-side-navigation",
+                                        "--ignore-certificate-errors");
+            _driver = new ChromeDriver(chromeOptions);
+            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-            _driver.Manage().Window.Maximize();
+            //driver.Manage().Window.Maximize();
             _driver.Navigate().GoToUrl(AppSettings.UrlQA);
 
             try
@@ -206,64 +214,57 @@ namespace UnidasTestProject.Resource
         }
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
-            try
-
+            int tries = 0;            
+            while (tries <3) 
             {
                 Thread.Sleep(3000);
-                bool staleElement = true;
-                while (staleElement)
+                try
                 {
-                    try
+                    switch (action)
                     {
-                        switch (action)
-                        {
-                            case Action.Click:
-                                element.Click();
-                                break;
-                            case Action.ClickPoint:
-                                new Actions(_driver).MoveToElement(element).Click().Perform();
-                                break;
-                            case Action.DoubleClick:
-                                new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
-                                break;
-                            case Action.DoubleClickJs:
-                                Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
-                                break;
-                            case Action.ClickJs:
-                                Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
-                                break;
-                            case Action.SendKey:
-                                element.SendKeys(text);
-                                break;
-                            case Action.Clear:
-                                element.Clear();
-                                break;
-                            case Action.Submit:
-                                element.Submit();
-                                break;
-                            case Action.Enter:
-                                element.SendKeys(Keys.Enter);
-                                break;
-                            case Action.Wait:
-                                break;
-                        }
-                        staleElement = false;
-                        Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
+                        case Action.Click:
+                            element.Click();
+                            break;
+                        case Action.ClickPoint:
+                            new Actions(_driver).MoveToElement(element).Click().Perform();
+                            break;
+                        case Action.DoubleClick:
+                            new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
+                            break;
+                        case Action.DoubleClickJs:
+                            Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
+                            break;
+                        case Action.ClickJs:
+                            Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
+                            break;
+                        case Action.SendKey:
+                            element.SendKeys(text);
+                            break;
+                        case Action.Clear:
+                            element.Clear();
+                            break;
+                        case Action.Submit:
+                            element.Submit();
+                            break;
+                        case Action.Enter:
+                            element.SendKeys(Keys.Enter);
+                            break;
+                        case Action.Wait:
+                            break;
                     }
-                    catch (StaleElementReferenceException e)
-                    {
-                        staleElement = false;
-                    }
+                    Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
+                    tries = 3;
                 }
-            }
-            catch (NoSuchElementException e)
-            {
-                Checkpoint(false, e.Message);
-            }
-            catch (Exception e)
-            {
-                Checkpoint(false, "An unexpected error occurred: " + e.Message);
-            }
+                catch (Exception e)
+                {
+                    tries++;
+                    if (tries == 3)
+                    {
+                        Checkpoint(false, "Erro: " + e.Message + " " + tries + " tentativas");                       
+                        throw;
+                    }                    
+                }
+            }                       
         }
         public static IWebElement WaitForElementToBeVisible(IWebElement element)
         {

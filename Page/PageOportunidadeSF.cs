@@ -19,7 +19,8 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _btnNovaCotacao;
 
-        [FindsBy(How = How.XPath, Using = "//button[@title='Editar Prazo contratual']//span[@class='inline-edit-trigger-icon slds-button__icon slds-button__icon_hint']")]
+        //button[@title='Editar Prazo contratual']//span[@class='inline-edit-trigger-icon slds-button__icon slds-button__icon_hint']
+        [FindsBy(How = How.XPath, Using = "//section[@class='tabContent active oneConsoleTab']//button[@title='Editar Prazo contratual']//span[1]")]
         [CacheLookup]
         public IWebElement? _btnEditOportunidade;
 

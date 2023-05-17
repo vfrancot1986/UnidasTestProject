@@ -31,8 +31,9 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _FiltrarProdutos;
         //td[@tabindex='-1']//input[@tabindex='0']//following::label//span[@class='slds-assistive-text']
-        //td[@tabindex='-1']//input[@tabindex='0']//following::label//span[contains(text(), 'Selecionar item 1')]
-        [FindsBy(How = How.XPath, Using = "//td[@tabindex='-1']//input[@tabindex='0']//following::label")]
+        
+        //td[@tabindex='-1']//input[@tabindex='0']//following::label
+        [FindsBy(How = How.XPath, Using = "//td[@tabindex='-1']//input[@tabindex='0']//following::label//span[contains(text(), 'Selecionar item 1')]")]
         [CacheLookup]
         public IWebElement? _SelecionarProduto;
 
