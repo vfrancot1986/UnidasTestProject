@@ -19,7 +19,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _btnSalvar;
 
-        [FindsBy(How = How.XPath, Using = "//span[@title='Itens da linha de cotação']")]
+        [FindsBy(How = How.XPath, Using = "//h2//span[@title='Itens da linha de cotação']")]
         [CacheLookup]
         public IWebElement? _ItensLinhaCotacao;
 
