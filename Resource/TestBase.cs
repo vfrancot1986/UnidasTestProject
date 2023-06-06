@@ -8,8 +8,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using UnidasTestProject.Settings;
 
 
@@ -31,6 +33,9 @@ namespace UnidasTestProject.Resource
         private static string? TestInfo;
         private static readonly string Logger = string.Empty;
         public enum Action{ Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
+        public enum Request { Get, Post, Put, Patch, Delete, Head, Options}
+        public enum Environment { Web, Api, Mobile, Desktop }
+
         //Construtor
         protected TestBase()
         {
@@ -214,66 +219,104 @@ namespace UnidasTestProject.Resource
         }
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
-            int tries = 0;            
-            while (tries <3) 
+            
+            int tries = 0;
+            while (tries < 3)
             {
-                Thread.Sleep(3000);
                 try
                 {
-                    switch (action)
+                    Thread.Sleep(3000);
+                    var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
+                    wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
+                    wait.Until(driver =>
                     {
-                        case Action.Click:
-                            element.Click();
-                            break;
-                        case Action.ClickPoint:
-                            new Actions(_driver).MoveToElement(element).Click().Perform();
-                            break;
-                        case Action.DoubleClick:
-                            new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
-                            break;
-                        case Action.DoubleClickJs:
-                            Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
-                            break;
-                        case Action.ClickJs:
-                            Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
-                            break;
-                        case Action.SendKey:
-                            element.SendKeys(text);
-                            break;
-                        case Action.Clear:
-                            element.Clear();
-                            break;
-                        case Action.Submit:
-                            element.Submit();
-                            break;
-                        case Action.Enter:
-                            element.SendKeys(Keys.Enter);
-                            break;
-                        case Action.Wait:
-                            break;
-                    }
-                    Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento");
-                    tries = 3;
+                        if (element.Displayed)
+                        {
+                            switch (action)
+                            {
+                                case Action.Click:
+                                    element.Click();
+                                    break;
+                                case Action.ClickPoint:
+                                    new Actions(_driver).MoveToElement(element).Click().Perform();
+                                    break;
+                                case Action.DoubleClick:
+                                    new Actions(_driver).MoveToElement(element).DoubleClick().Perform();
+                                    break;
+                                case Action.DoubleClickJs:
+                                    Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].dbclick();");
+                                    break;
+                                case Action.ClickJs:
+                                    Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible'; arguments[0].click();");
+                                    break;
+                                case Action.SendKey:
+                                    element.SendKeys(text);
+                                    break;
+                                case Action.Clear:
+                                    element.Clear();
+                                    break;
+                                case Action.Submit:
+                                    element.Submit();
+                                    break;
+                                case Action.Enter:
+                                    element.SendKeys(Keys.Enter);
+                                    break;
+                                case Action.Wait:
+                                    break;
+                            }
+                            Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento " + element);
+                            tries = 3;
+                            return element;
+                        }
+                        else
+                        {
+                            Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
+                        }                        
+                        return null;
+                    });
                 }
                 catch (Exception e)
-                {
+                    {
+                    By locator = GetLocatorFromPageObject(element);
+                    element = ReFindElement(element);
+
+                    Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
                     tries++;
                     if (tries == 3)
                     {
-                        Checkpoint(false, "Erro: " + e.Message + " " + tries + " tentativas");                       
+                        Checkpoint(false, "Erro: " + e.Message + " " + tries + " tentativas");
                         throw;
-                    }                    
+                    }
                 }
-            }                       
+            }                                   
         }
         public static IWebElement WaitForElementToBeVisible(IWebElement element)
         {
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
-            wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
-            element = wait.Until(_driver => element);            
             return wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
 
+
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
+
+        public static By GetLocatorFromPageObject(IWebElement element)
+        {
+            if (element == null) throw new NullReferenceException();
+
+            var attributes = Utils.RunJavaScript2(_driver,element,"var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;") as Dictionary<string, object>;
+            if (attributes == null) throw new NullReferenceException();
+
+            var selector = "//" + element.TagName;
+            selector = attributes.Aggregate(selector, (current, attribute) =>
+                 current + "[@" + attribute.Key + "='" + attribute.Value + "']");
+
+            return By.XPath(selector);
+        }
+
+        private static IWebElement ReFindElement(IWebElement element)
+        {
+            var locator = GetLocatorFromPageObject(element);
+            return _driver.FindElement(locator);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace UnidasTestProject.Resource
 {
@@ -31,5 +31,13 @@ namespace UnidasTestProject.Resource
             IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
             jsExecutor.ExecuteScript(javascript, element); 
         }
+        public static Dictionary<string, object> RunJavaScript2(IWebDriver driver, IWebElement? element, string javascript)
+        {
+            IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
+            jsExecutor.ExecuteScript(javascript, element);
+
+            return new Dictionary<string, object>();
+        }
+
     }
 }
