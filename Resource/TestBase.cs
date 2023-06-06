@@ -225,7 +225,7 @@ namespace UnidasTestProject.Resource
             {
                 try
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(5000);
                     var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
                     wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
                     wait.Until(driver =>
