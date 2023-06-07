@@ -15,7 +15,7 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _lkRelacionado;
 
-        [FindsBy(How = How.XPath, Using = "//button[contains(text(), 'Nova cotação')]")]
+        [FindsBy(How = How.XPath, Using = "(//section//button[contains(text(), 'Nova cotação')])[last()]")]
         [CacheLookup]
         public IWebElement? _btnNovaCotacao;
 

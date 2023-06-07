@@ -276,10 +276,8 @@ namespace UnidasTestProject.Resource
                     });
                 }
                 catch (Exception e)
-                    {
-                    By locator = GetLocatorFromPageObject(element);
+                    {                    
                     element = ReFindElement(element);
-
                     Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
                     tries++;
                     if (tries == 3)
@@ -303,7 +301,7 @@ namespace UnidasTestProject.Resource
         {
             if (element == null) throw new NullReferenceException();
 
-            var attributes = Utils.RunJavaScript2(_driver,element,"var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;") as Dictionary<string, object>;
+            var attributes = Utils.RunJavaScript2(_driver,element,"var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;");
             if (attributes == null) throw new NullReferenceException();
 
             var selector = "//" + element.TagName;
