@@ -13,7 +13,6 @@ using System.Diagnostics.CodeAnalysis;
 using UnidasTestProject.Settings;
 using RestSharp;
 
-
 namespace UnidasTestProject.Resource
 {
     public abstract class TestBase
@@ -31,9 +30,8 @@ namespace UnidasTestProject.Resource
         private static string? EvidenceFileName;
         private static string? TestInfo;
         private static readonly string Logger = string.Empty;
-        private static RestClient client;
+
         public enum Action{ Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
-        public enum Request { Get, Post, Put, Patch, Delete, Head, Options}
         public enum Environment { Web, Api, Mobile, Desktop }
 
         //Construtor
@@ -315,6 +313,23 @@ namespace UnidasTestProject.Resource
         {
             var locator = GetLocatorFromPageObject(element);
             return _driver.FindElement(locator);
+        }
+
+        public static RestResponse GetReponse(string url, string partialUrl, Method metodo, params Parameter[] parametros)
+        {
+            var client = new RestClient(url);
+            var request = new RestRequest(partialUrl, metodo);
+            foreach (Parameter param in parametros)
+            {
+                request.AddParameter(param);
+            }
+            RestResponse response = client.Execute(request);
+            return response;
+        }
+        public static Parameter Parametro(ParameterType Type, string name, string value)
+        {
+            Parameter param = Parameter.CreateParameter(name, value, Type);
+            return param;
         }
     }
 }
