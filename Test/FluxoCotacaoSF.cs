@@ -51,6 +51,7 @@ namespace UnidasTestProject.Test
             ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
             ControllerPageCatacaoSF.FinalizarCotacao(_produto);
             ControllerPageCatacaoSF.PreencherItensLinhaCotacao(_tpRodagem, _quantidade, _tipoUso, _valorVenda, _usoMensal, _ufEntrega, _pMunicipioEntrega, _qtdPneus, _manutencao, _grupo, _tpReserva, _qtdDiariaReserva);
+            
             //Assert - Validacao do teste
             Assert.IsTrue(true);
         }

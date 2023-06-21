@@ -30,7 +30,7 @@ namespace UnidasTestProject.Controller
             ThisElement(_PageCotacaoSF._AdicionarProdutos, Action.Click);
             ThisElement(_PageCotacaoSF._FiltrarProdutos, Action.SendKey, produto);
             ThisElement(_PageCotacaoSF._FiltrarProdutos, Action.Enter);
-            ThisElement(_PageCotacaoSF._SelecionarProduto, Action.Click);
+            ThisElement(_PageCotacaoSF._SelecionarProduto, Action.ClickJs);
             ThisElement(_PageCotacaoSF._BtnAvancar, Action.Click);
         }
         public void PreencherItensLinhaCotacao(string tpRodagem, string quantidade, string tipoUso, string valorVenda, string usoMensal, string ufEntrega, string pMunicipioEntrega, string qtdPneus, string manutencao, string grupo, string tpReserva, string qtdDiariaReserva)

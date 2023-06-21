@@ -8,11 +8,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using UnidasTestProject.Settings;
+using RestSharp;
 
 
 namespace UnidasTestProject.Resource
@@ -32,6 +31,7 @@ namespace UnidasTestProject.Resource
         private static string? EvidenceFileName;
         private static string? TestInfo;
         private static readonly string Logger = string.Empty;
+        private static RestClient client;
         public enum Action{ Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
         public enum Request { Get, Post, Put, Patch, Delete, Head, Options}
         public enum Environment { Web, Api, Mobile, Desktop }

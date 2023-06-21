@@ -43,10 +43,6 @@ namespace UnidasTestProject.Page
         [CacheLookup]
         public IWebElement? _btnSalvar;
 
-        [FindsBy(How = How.XPath, Using = "//button[@name='SaveEdit']")]
-        [CacheLookup]
-        public IWebElement? _btnNavaCotacao;
-
         [FindsBy(How = How.XPath, Using = "//button[@aria-label='Regional, --Nenhum--']")]
         [CacheLookup]
         public IWebElement? _txtRegional;
