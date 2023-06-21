@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using RestSharp;
 using UnidasTestProject.Controller;
 using UnidasTestProject.Resource;
 using UnidasTestProject.Settings;
@@ -15,10 +16,10 @@ namespace UnidasTestProject.Test
         public void TestFluxoCotacao()
         {
             //Arrange - Pre-condicao do teste
-            ControllerPageLoginSF ControllerPageLoginSF = new (_driver);
-            ControllerPageInicioSF ControllerPageInicioSF = new (_driver);
-            ControllerPageContaSF ControllerPageContaSF = new (_driver);
-            ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new (_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new(_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new(_driver);
+            ControllerPageContaSF ControllerPageContaSF = new(_driver);
+            ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new(_driver);
             ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new(_driver);
             ControllerPageCotacaoSF ControllerPageCatacaoSF = new(_driver);
 
@@ -40,6 +41,7 @@ namespace UnidasTestProject.Test
             string _grupo = AppSettings.Grupo;
             string _tpReserva = AppSettings.TpReserva;
             string _qtdDiariaReserva = AppSettings.QtdDiariaReserva;
+            
 
             //Act - Acoes do teste
             ControllerPageLoginSF.FazerLogin(_usuario, _senha);
@@ -51,7 +53,7 @@ namespace UnidasTestProject.Test
             ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
             ControllerPageCatacaoSF.FinalizarCotacao(_produto);
             ControllerPageCatacaoSF.PreencherItensLinhaCotacao(_tpRodagem, _quantidade, _tipoUso, _valorVenda, _usoMensal, _ufEntrega, _pMunicipioEntrega, _qtdPneus, _manutencao, _grupo, _tpReserva, _qtdDiariaReserva);
-            
+
             //Assert - Validacao do teste
             Assert.IsTrue(true);
         }
@@ -78,5 +80,27 @@ namespace UnidasTestProject.Test
 
         //    Assert.IsTrue(ControllerPageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
         //}
+
+        //TestCase
+        [Test]
+        public void PegarToken()
+        {
+            //Arrange - Pre-condicao do teste
+            RestResponse response;
+            string url = "https://apicorp-qa.hml.unidas.com.br";
+            string partialUrl = "/rfc-oauth/v1/token";
+            string basic = "Basic Y2E3NjQ0MTYtMDE3NC00YzQxLWE0N2QtYTNjMjU5N2U2NmZiOjQ5OGVkNzIyLWNmMmItNDgwNy1iMTgzLTY3ZjhiN2Y1MGE2ZA==";
+
+            //Act - Acoes do teste
+            response = GetReponse(url, partialUrl, Method.Post,
+            Parametro(ParameterType.HttpHeader, "Authorization", basic),
+            Parametro(ParameterType.HttpHeader, "Content-Type", "application/json"),
+            Parametro(ParameterType.RequestBody, "application/json", "{ \"grant_type\": \"client_credentials\" }"),
+            Parametro(ParameterType.QueryString, "ID", "10"));
+
+            //Assert - Validacao do teste
+            Assert.IsNotNull(response);
+            Assert.AreEqual(200, response.StatusCode);
+        }
     }
 }
