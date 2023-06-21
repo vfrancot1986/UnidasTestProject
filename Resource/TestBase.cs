@@ -31,7 +31,7 @@ namespace UnidasTestProject.Resource
         private static string? TestInfo;
         private static readonly string Logger = string.Empty;
 
-        public enum Action{ Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
+        public enum Action { Click, ClickPoint, ClickJs, DoubleClick, DoubleClickJs, SendKey, Clear, Submit, Wait, Enter }
         public enum Environment { Web, Api, Mobile, Desktop }
 
         //Construtor
@@ -108,8 +108,8 @@ namespace UnidasTestProject.Resource
         {
             // Configuracao do WebDriver
             var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments( "start-maximized",
-                                        "enable-automation",                                        
+            chromeOptions.AddArguments("start-maximized",
+                                        "enable-automation",
                                         "--no-sandbox",
                                         "--disable-infobars",
                                         "--disable-dev-shm-usage",
@@ -191,7 +191,7 @@ namespace UnidasTestProject.Resource
         }
 
         public static void Checkpoint(bool condition, string message)
-        {   
+        {
             if (IsNotNull(_driver))
             {
                 _timeStamp = $"{DateTime.Now:ddMMyyyyThhmmss}";
@@ -217,7 +217,7 @@ namespace UnidasTestProject.Resource
         }
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
-            
+
             int tries = 0;
             while (tries < 3)
             {
@@ -269,12 +269,12 @@ namespace UnidasTestProject.Resource
                         else
                         {
                             Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
-                        }                        
+                        }
                         return null;
                     });
                 }
                 catch (Exception e)
-                    {                    
+                {
                     element = ReFindElement(element);
                     Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
                     tries++;
@@ -284,7 +284,7 @@ namespace UnidasTestProject.Resource
                         throw;
                     }
                 }
-            }                                   
+            }
         }
         public static IWebElement WaitForElementToBeVisible(IWebElement element)
         {
@@ -299,7 +299,7 @@ namespace UnidasTestProject.Resource
         {
             if (element == null) throw new NullReferenceException();
 
-            var attributes = Utils.RunJavaScript2(_driver,element,"var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;");
+            var attributes = Utils.RunJavaScript2(_driver, element, "var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;");
             if (attributes == null) throw new NullReferenceException();
 
             var selector = "//" + element.TagName;
@@ -314,22 +314,27 @@ namespace UnidasTestProject.Resource
             var locator = GetLocatorFromPageObject(element);
             return _driver.FindElement(locator);
         }
-
-        public static RestResponse GetReponse(string url, string partialUrl, Method metodo, params Parameter[] parametros)
+        public static RestResponse GetReponse(string url, string partialUrl, Method metodo, params CustomParameter[] parametros)
         {
             var client = new RestClient(url);
             var request = new RestRequest(partialUrl, metodo);
-            foreach (Parameter param in parametros)
+
+            foreach (var param in parametros)
             {
                 request.AddParameter(param);
             }
+
             RestResponse response = client.Execute(request);
             return response;
         }
-        public static Parameter Parametro(ParameterType Type, string name, string value)
+    }
+    public class CustomParameter : Parameter
+    {
+        public CustomParameter(string name, object value, ParameterType type)
+            : base(name, value, type)
         {
-            Parameter param = Parameter.CreateParameter(name, value, Type);
-            return param;
+
+
         }
     }
 }

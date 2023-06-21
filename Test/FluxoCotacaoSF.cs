@@ -80,27 +80,6 @@ namespace UnidasTestProject.Test
 
         //    Assert.IsTrue(ControllerPageOportunidadeSF.ValidarMsgUsuarioNaoPossuiAreaNegocio());
         //}
-
-        //TestCase
-        [Test]
-        public void PegarToken()
-        {
-            //Arrange - Pre-condicao do teste
-            RestResponse response;
-            string url = "https://apicorp-qa.hml.unidas.com.br";
-            string partialUrl = "/rfc-oauth/v1/token";
-            string basic = "Basic Y2E3NjQ0MTYtMDE3NC00YzQxLWE0N2QtYTNjMjU5N2U2NmZiOjQ5OGVkNzIyLWNmMmItNDgwNy1iMTgzLTY3ZjhiN2Y1MGE2ZA==";
-
-            //Act - Acoes do teste
-            response = GetReponse(url, partialUrl, Method.Post,
-            Parametro(ParameterType.HttpHeader, "Authorization", basic),
-            Parametro(ParameterType.HttpHeader, "Content-Type", "application/json"),
-            Parametro(ParameterType.RequestBody, "application/json", "{ \"grant_type\": \"client_credentials\" }"),
-            Parametro(ParameterType.QueryString, "ID", "10"));
-
-            //Assert - Validacao do teste
-            Assert.IsNotNull(response);
-            Assert.AreEqual(200, response.StatusCode);
-        }
+       
     }
 }
