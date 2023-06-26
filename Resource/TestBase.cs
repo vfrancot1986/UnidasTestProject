@@ -21,7 +21,7 @@ namespace UnidasTestProject.Resource
         public static IWebDriver _driver = null!;
         private static string _timeStamp = $"{DateTime.Now:ddMMyyyyThhmmss}";
         public ServiceProvider ServiceProvider { get; }
-        private static readonly string TestResultsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_" + _timeStamp);
+        private static readonly string TestResultsDirectory = Path.Combine(path1: AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_" + _timeStamp);
         public string ExtentFileName = null!;
         public ExtentReports Extent = null!;
         private static ExtentTest? Test;
@@ -117,8 +117,7 @@ namespace UnidasTestProject.Resource
                                         "--ignore-certificate-errors");
             _driver = new ChromeDriver(chromeOptions);
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-            //driver.Manage().Window.Maximize();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);            
             _driver.Navigate().GoToUrl(AppSettings.UrlQA);
 
             try
@@ -226,7 +225,7 @@ namespace UnidasTestProject.Resource
                     Thread.Sleep(5000);
                     var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
                     wait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(By.TagName("body")));
-                    wait.Until(driver =>
+                    _ = wait.Until(driver =>
                     {
                         if (element.Displayed)
                         {
@@ -275,7 +274,7 @@ namespace UnidasTestProject.Resource
                 }
                 catch (Exception e)
                 {
-                    element = ReFindElement(element);
+                    element = ReFindElement(element: element);
                     Utils.RunJavaScript(_driver, element, "arguments[0].style.height='auto'; arguments[0].style.visibility='visible';");
                     tries++;
                     if (tries == 3)
@@ -299,9 +298,7 @@ namespace UnidasTestProject.Resource
         {
             if (element == null) throw new NullReferenceException();
 
-            var attributes = Utils.RunJavaScript2(_driver, element, "var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;");
-            if (attributes == null) throw new NullReferenceException();
-
+            var attributes = Utils.RunJavaScript2(_driver, element, "var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;") ?? throw new NullReferenceException();
             var selector = "//" + element.TagName;
             selector = attributes.Aggregate(selector, (current, attribute) =>
                  current + "[@" + attribute.Key + "='" + attribute.Value + "']");
@@ -314,7 +311,7 @@ namespace UnidasTestProject.Resource
             var locator = GetLocatorFromPageObject(element);
             return _driver.FindElement(locator);
         }
-        public static RestResponse GetReponse(string url, string partialUrl, Method metodo, params CustomParameter[] parametros)
+        public async Task<RestResponse<T>> GetResponse<T>(string url, string partialUrl, Method metodo, params Parameter[] parametros)
         {
             var client = new RestClient(url);
             var request = new RestRequest(partialUrl, metodo);
@@ -324,17 +321,8 @@ namespace UnidasTestProject.Resource
                 request.AddParameter(param);
             }
 
-            RestResponse response = client.Execute(request);
+            var response = await client.ExecuteAsync<T>(request);
             return response;
-        }
-    }
-    public class CustomParameter : Parameter
-    {
-        public CustomParameter(string name, object value, ParameterType type)
-            : base(name, value, type)
-        {
-
-
-        }
-    }
+        }        
+    }   
 }

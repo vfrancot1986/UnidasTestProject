@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using RestSharp;
 using UnidasTestProject.Controller;
 using UnidasTestProject.Resource;
 using UnidasTestProject.Settings;
@@ -16,12 +15,12 @@ namespace UnidasTestProject.Test
         public void TestFluxoCotacao()
         {
             //Arrange - Pre-condicao do teste
-            ControllerPageLoginSF ControllerPageLoginSF = new(_driver);
-            ControllerPageInicioSF ControllerPageInicioSF = new(_driver);
-            ControllerPageContaSF ControllerPageContaSF = new(_driver);
-            ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new(_driver);
-            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new(_driver);
-            ControllerPageCotacaoSF ControllerPageCatacaoSF = new(_driver);
+            ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
+            ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
+            ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);
+            ControllerPageOportunidadeCadSF ControllerPageOportunidadeCadSF = new ControllerPageOportunidadeCadSF(_driver);
+            ControllerPageOportunidadeSF ControllerPageOportunidadeSF = new ControllerPageOportunidadeSF(_driver);
+            ControllerPageCotacaoSF ControllerPageCotacaoSF = new ControllerPageCotacaoSF(_driver);
 
             string _usuario = AppSettings.UserQA;
             string _senha = AppSettings.PasswordQA;
@@ -50,9 +49,9 @@ namespace UnidasTestProject.Test
             ControllerPageOportunidadeCadSF.CadNovaOportunidade(_nmOportunidade);
             ControllerPageOportunidadeSF.PrencherCamposNovaOportunidade();
             ControllerPageOportunidadeSF.CadNovaCotacao();
-            ControllerPageCatacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
-            ControllerPageCatacaoSF.FinalizarCotacao(_produto);
-            ControllerPageCatacaoSF.PreencherItensLinhaCotacao(_tpRodagem, _quantidade, _tipoUso, _valorVenda, _usoMensal, _ufEntrega, _pMunicipioEntrega, _qtdPneus, _manutencao, _grupo, _tpReserva, _qtdDiariaReserva);
+            ControllerPageCotacaoSF.PrencherCamposCotacao(_nmCotacao, _prazoContrautual);
+            ControllerPageCotacaoSF.FinalizarCotacao(_produto);
+            ControllerPageCotacaoSF.PreencherItensLinhaCotacao(_tpRodagem, _quantidade, _tipoUso, _valorVenda, _usoMensal, _ufEntrega, _pMunicipioEntrega, _qtdPneus, _manutencao, _grupo, _tpReserva, _qtdDiariaReserva);
 
             //Assert - Validacao do teste
             Assert.IsTrue(true);
