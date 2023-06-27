@@ -21,7 +21,7 @@ namespace UnidasTestProject.Resource
         public static IWebDriver _driver = null!;
         private static string _timeStamp = $"{DateTime.Now:ddMMyyyyThhmmss}";
         public ServiceProvider ServiceProvider { get; }
-        private static readonly string TestResultsDirectory = Path.Combine(path1: AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net6.0", "\\TestResults"), $"Deploy_" + _timeStamp);
+        private static readonly string TestResultsDirectory = Path.Combine(path1: AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug\\net7.0-windows", "\\TestResults"), $"Deploy_" + _timeStamp);
         public string ExtentFileName = null!;
         public ExtentReports Extent = null!;
         private static ExtentTest? Test;
@@ -98,7 +98,6 @@ namespace UnidasTestProject.Resource
             catch (Exception)
             {
                 throw;
-
             }
         }
 
@@ -106,20 +105,6 @@ namespace UnidasTestProject.Resource
         [SetUp]
         public void BeforeTest()
         {
-            // Configuracao do WebDriver
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("start-maximized",
-                                        "enable-automation",
-                                        "--no-sandbox",
-                                        "--disable-infobars",
-                                        "--disable-dev-shm-usage",
-                                        "--disable-browser-side-navigation",
-                                        "--ignore-certificate-errors");
-            _driver = new ChromeDriver(chromeOptions);
-            _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);            
-            _driver.Navigate().GoToUrl(AppSettings.UrlQA);
-
             try
             {
                 Test = Extent.CreateTest(TestContext.CurrentContext.Test.Name);
@@ -189,7 +174,7 @@ namespace UnidasTestProject.Resource
             }
         }
 
-        public static void Checkpoint(bool condition, string message)
+        public static void CheckpointWeb(bool condition, string message)
         {
             if (IsNotNull(_driver))
             {
@@ -213,6 +198,22 @@ namespace UnidasTestProject.Resource
                 }
             }
 
+        }
+        public static void CheckpointApi(RestResponse response) //ajustar
+        {   
+            if (IsNotNull(response))
+            {
+                if (response.IsSuccessful)
+                {
+                    TestInfo = Logger + " " + response.StatusCode + " : " + response.Content;
+                    Test.Log(Status.Pass, TestInfo);
+                } else
+                {
+                    TestInfo = Logger + " " + response.StatusCode + " : " + response.Content;
+                    Test.Log(Status.Fail, TestInfo);
+                    Assert.Fail();
+                }
+            }
         }
         public static void ThisElement(IWebElement? element, Action action, string text = "")
         {
@@ -261,7 +262,7 @@ namespace UnidasTestProject.Resource
                                 case Action.Wait:
                                     break;
                             }
-                            Checkpoint(true, "Acao " + action + " realizada com sucesso no elemento " + element);
+                            CheckpointWeb(true, "Acao " + action + " realizada com sucesso no elemento " + element);
                             tries = 3;
                             return element;
                         }
@@ -279,7 +280,7 @@ namespace UnidasTestProject.Resource
                     tries++;
                     if (tries == 3)
                     {
-                        Checkpoint(false, "Erro: " + e.Message + " " + tries + " tentativas");
+                        CheckpointWeb(false, "Erro: " + e.Message + " " + tries + " tentativas");
                         throw;
                     }
                 }
@@ -290,7 +291,6 @@ namespace UnidasTestProject.Resource
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
             return wait.Until(ExpectedConditions.ElementToBeClickable(element));
         }
-
 
         private static bool IsNotNull([NotNullWhen(true)] object? obj) => obj != null;
 
@@ -311,7 +311,7 @@ namespace UnidasTestProject.Resource
             var locator = GetLocatorFromPageObject(element);
             return _driver.FindElement(locator);
         }
-        public async Task<RestResponse<T>> GetResponse<T>(string url, string partialUrl, Method metodo, params Parameter[] parametros)
+        public async Task<RestResponse<T>> GetResponse<T>(string url, string partialUrl, Method metodo, object jsonBody = null, params Parameter[] parametros)
         {
             var client = new RestClient(url);
             var request = new RestRequest(partialUrl, metodo);
@@ -321,8 +321,36 @@ namespace UnidasTestProject.Resource
                 request.AddParameter(param);
             }
 
+            if (jsonBody != null)
+            { 
+                request.AddJsonBody(new { grant_type = "client_credentials" });
+            }
+
             var response = await client.ExecuteAsync<T>(request);
             return response;
-        }        
-    }   
+        }
+        public void SetAmbiente(Environment ambiente)
+        {
+            if (ambiente == Environment.Web)
+            {
+                // Configuracao do WebDriver
+                var chromeOptions = new ChromeOptions();
+                chromeOptions.AddArguments("start-maximized",
+                                            "enable-automation",
+                                            "--no-sandbox",
+                                            "--disable-infobars",
+                                            "--disable-dev-shm-usage",
+                                            "--disable-browser-side-navigation",
+                                            "--ignore-certificate-errors");
+                _driver = new ChromeDriver(chromeOptions);
+                _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+                _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+                _driver.Navigate().GoToUrl(AppSettings.UrlQA);
+            }
+            if (ambiente == Environment.Api)
+            {
+
+            }
+        }
+    }
 }

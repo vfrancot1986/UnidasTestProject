@@ -15,6 +15,7 @@ namespace UnidasTestProject.Test
         public void TestFluxoCotacao()
         {
             //Arrange - Pre-condicao do teste
+            SetAmbiente(Environment.Web);
             ControllerPageLoginSF ControllerPageLoginSF = new ControllerPageLoginSF(_driver);
             ControllerPageInicioSF ControllerPageInicioSF = new ControllerPageInicioSF(_driver);
             ControllerPageContaSF ControllerPageContaSF = new ControllerPageContaSF(_driver);

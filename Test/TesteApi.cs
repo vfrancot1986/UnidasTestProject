@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using NUnit.Framework;
 using RestSharp;
 using System.Net;
@@ -13,7 +14,9 @@ namespace UnidasTestProject.Test
         [Test]
         public async Task PegarToken()
         {
+
             // Arrange - Pre-condicao do teste
+            SetAmbiente(Environment.Api);
             RestResponse<TokenResponse> response;
             string url = "https://apicorp-qa.hml.unidas.com.br";
             string partialUrl = "/rfc-oauth/v1/token";
@@ -24,17 +27,17 @@ namespace UnidasTestProject.Test
             {
                 Parameter.CreateParameter("Authorization", basic, ParameterType.HttpHeader),
                 Parameter.CreateParameter("Content-Type", "application/json", ParameterType.HttpHeader),
-                Parameter.CreateParameter("application/json", "{ \"grant_type\": \"client_credentials\" }", ParameterType.RequestBody)
             };
 
+            //
+            TokenRequest jsonBody = new TokenRequest();
+            jsonBody.grant_type = "client_credentials";
+
             // Act - Acoes do teste
-            response = await GetResponse<TokenResponse>(url, partialUrl, Method.Post, parametros);
+            response = await GetResponse<TokenResponse>(url, partialUrl, Method.Post, jsonBody, parametros);
 
             // Assert - Validacao do teste
-            Assert.IsNotNull(response);
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            Assert.IsNotNull(response.Data);
-
+            CheckpointApi(response);
             var token = response.Data.Access_token;
         }
     }
