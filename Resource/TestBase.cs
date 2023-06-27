@@ -12,6 +12,7 @@ using SeleniumExtras.WaitHelpers;
 using System.Diagnostics.CodeAnalysis;
 using UnidasTestProject.Settings;
 using RestSharp;
+using System.Net;
 
 namespace UnidasTestProject.Resource
 {
@@ -199,11 +200,11 @@ namespace UnidasTestProject.Resource
             }
 
         }
-        public static void CheckpointApi(RestResponse response) //ajustar
+        public static void CheckpointApi(RestResponse response, HttpStatusCode status) //ajustar
         {   
             if (IsNotNull(response))
             {
-                if (response.IsSuccessful)
+                if (response.StatusCode.Equals(status))
                 {
                     TestInfo = Logger + " " + response.StatusCode + " : " + response.Content;
                     Test.Log(Status.Pass, TestInfo);

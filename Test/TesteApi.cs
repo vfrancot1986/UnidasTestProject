@@ -37,7 +37,7 @@ namespace UnidasTestProject.Test
             response = await GetResponse<TokenResponse>(url, partialUrl, Method.Post, jsonBody, parametros);
 
             // Assert - Validacao do teste
-            CheckpointApi(response);
+            CheckpointApi(response, HttpStatusCode.OK);
             var token = response.Data.Access_token;
         }
     }
