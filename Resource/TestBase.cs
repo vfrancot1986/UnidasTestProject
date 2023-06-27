@@ -347,10 +347,6 @@ namespace UnidasTestProject.Resource
                 _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
                 _driver.Navigate().GoToUrl(AppSettings.UrlQA);
             }
-            if (ambiente == Environment.Api)
-            {
-
-            }
         }
     }
 }
