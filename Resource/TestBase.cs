@@ -323,7 +323,7 @@ namespace UnidasTestProject.Resource
 
             if (jsonBody != null)
             { 
-                request.AddJsonBody(new { grant_type = "client_credentials" });
+                request.AddJsonBody(jsonBody);
             }
 
             var response = await client.ExecuteAsync<T>(request);
